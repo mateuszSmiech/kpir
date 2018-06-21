@@ -17,6 +17,7 @@
 *.ipr
 *.cmd
 mvnw
+resources/application.properties
 
 
 ### NetBeans ###
