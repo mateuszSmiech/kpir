@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        } );
+    </script>
+</head>
+<body>
+<h1> Formularz rejestracyjny</h1>
+<form th:action="@{add}" th:object="${createUser}" method="post">
+    Imię:
+    <input type="text" th:field="*{firstName}"/><br/>
+    Nazwisko:
+    <input type="text" th:field="*{lastName}"/><br/>
+    Hasło:
+    <input type="password" th:field="*{password}"/><br/>
+    Email:
+    <input type="email" th:field="*{email}"/><br/>
+    Data urodzenia:
+    <input type="text" id="datepicker" th:field="*{birthDate}"/><br/>
+    <button type="submit">Zarejestruj</button>
+</form>
+
+</body>
+</html>
