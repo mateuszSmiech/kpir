@@ -17,6 +17,7 @@ public class CreateCompanyForm {
     private String nip;
     private String regon;
     private String street;
+    private String postCode;
     private String city;
     private String country;
     private String telephoneNumber;

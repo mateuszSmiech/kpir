@@ -20,7 +20,7 @@ public class CompanyEntityService {
     }
 
 
-    public void saveUser(CreateCompanyForm companyForm) {
+    public void saveCompany(CreateCompanyForm companyForm) {
         CompanyEntity company = convertToCompanyEntity(companyForm);
         companyEntityRepository.save(company);
     }
@@ -28,6 +28,7 @@ public class CompanyEntityService {
     private CompanyEntity convertToCompanyEntity(CreateCompanyForm companyForm) {
         Address address = new Address();
         address.setStreet(companyForm.getStreet());
+        address.setPostCode(companyForm.getPostCode());
         address.setCity(companyForm.getCity());
         address.setCountry(companyForm.getCountry());
         CompanyEntity companyEntity = new CompanyEntity();

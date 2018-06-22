@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dadawanie firmy</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+<body>
+<h1> Formularz dodawania nowej firmy</h1>
+<form th:action="@{add}" th:object="${createCompany}" method="post">
+    Skócona nazwa firmy:
+    <input type="text" th:field="*{shortCompanyName}"/><br/>
+    Pełna nazwa firmy:
+    <input type="text" th:field="*{fullCompanyName}"/><br/>
+    Wprowadź nip:
+    <input type="text" th:field="*{nip}"/><br/>
+    Wprowadź regon:
+    <input type="text" th:field="*{regon}"/><br/>
+    Podaj ulicę:
+    <input type="text" th:field="*{street}"/><br/>
+    Podaj kod pocztowy:
+    <input type="text" th:field="*{postCode}"/><br/>
+    Podaj miasto:
+    <input type="text" th:field="*{city}"/><br/>
+    Podaj kraj:
+    <input type="text" th:field="*{country}"/><br/>
+    Wprowadź numer telefonu:
+    <input type="text" th:field="*{telephoneNumber}"/><br/>
+    Wprowadź email:
+    <input type="text" th:field="*{email}"/><br/>
+    Czy płatnik vat:
+    <select th:field="*{vat}">
+        <option value="true">Tak</option>
+        <option value="false">Nie</option>
+    </select><br/>
+    Forma opodatkowania:
+    <select th:field="*{taxForm}">
+        <option value="liniowy">Liniowy</option>
+        <option value="ryczalt">Ryczałt</option>
+        <option value="karta">Karta podatkowa</option>
+    </select><br/>
+    <button type="submit">Zapisz</button>
+</form>
+
+</body>
+</html>

@@ -18,6 +18,8 @@ public class Address {
     @Column (nullable = false)
     private String street;
     @Column (nullable = false)
+    private String postCode;
+    @Column (nullable = false)
     private String city;
     private String country;
 }
