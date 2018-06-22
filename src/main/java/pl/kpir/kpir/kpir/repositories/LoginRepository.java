@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.kpir.kpir.kpir.model.UserEntity;
 
 @Repository
-public interface UserEntityRepository extends JpaRepository<UserEntity, Long> {
+public interface LoginRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query("SELECT u FROM UserEntity u WHERE u.email=:email")
-    UserEntity findUserByEmail(@Param("email") String email);
 
 }
