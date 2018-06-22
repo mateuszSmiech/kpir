@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "contractors")
-public class Contractor {
+public class ContractorEntity {
 
     //TODO add company id to contractor
     @Id
@@ -21,10 +21,10 @@ public class Contractor {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
-    @Column(name = "short_com_name", unique = true, nullable = false)
-    private String shortCompanyName;
-    @Column(name = "full_com_name", unique = true, nullable = false)
-    private String fullCompanyName;
+    @Column(name = "short_con_name", unique = true, nullable = false)
+    private String shortContractorName;
+    @Column(name = "full_con_name", unique = true, nullable = false)
+    private String fullContractorName;
     @Column(unique = true, nullable = false)
     private String nip;
     @Column(unique = true)
@@ -34,7 +34,4 @@ public class Contractor {
     @Column(name = "tel_number")
     private String telephoneNumber;
     private String email;
-    @Column(nullable = false)
-    private boolean vat;
-    private String taxForm;
 }
