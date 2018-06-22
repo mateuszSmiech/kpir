@@ -15,6 +15,8 @@ import javax.persistence.*;
 @Table(name = "companies")
 public class CompanyEntity {
 
+
+    //TODO add user id to company
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
