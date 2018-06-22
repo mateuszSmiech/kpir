@@ -3,10 +3,8 @@ package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCompanyForm;
-import pl.kpir.kpir.kpir.forms.CreateUserForm;
 import pl.kpir.kpir.kpir.model.Address;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.UserEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 
 @Service
