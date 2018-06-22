@@ -19,7 +19,7 @@ public class ContractorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "company_id")
     private UserEntity userEntity;
     @Column(name = "short_con_name", unique = true, nullable = false)
     private String shortContractorName;

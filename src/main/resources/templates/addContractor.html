@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dadawanie kontrahenta</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body>
+<h1> Formularz dodawania nowego kontrahenta</h1>
+<form th:action="@{add}" th:object="${addContractor}" method="post">
+    Skócona nazwa firmy:
+    <input type="text" th:field="*{shortCompanyName}"/><br/>
+    Pełna nazwa firmy:
+    <input type="text" th:field="*{fullCompanyName}"/><br/>
+    Wprowadź nip:
+    <input type="text" th:field="*{nip}"/><br/>
+    Podaj ulicę:
+    <input type="text" th:field="*{street}"/><br/>
+    Podaj kod pocztowy:
+    <input type="text" th:field="*{postCode}"/><br/>
+    Podaj miasto:
+    <input type="text" th:field="*{city}"/><br/>
+    Podaj kraj:
+    <input type="text" th:field="*{country}"/><br/>
+    Wprowadź numer telefonu:
+    <input type="text" th:field="*{telephoneNumber}"/><br/>
+    Wprowadź email:
+    <input type="text" th:field="*{email}"/><br/>
+    <button type="submit">Zapisz</button>
+</form>
 
 </body>
 </html>

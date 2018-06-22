@@ -31,7 +31,7 @@ public class ContractorEntityService {
         address.setCountry(contractorForm.getCountry());
         ContractorEntity contractorEntity = new ContractorEntity();
         contractorEntity.setShortContractorName(contractorForm.getShortCompanyName());
-        contractorEntity.setShortContractorName(contractorForm.getFullCompanyName());
+        contractorEntity.setFullContractorName(contractorForm.getFullCompanyName());
         contractorEntity.setNip(contractorForm.getNip());
         contractorEntity.setAddress(address);
         contractorEntity.setTelephoneNumber(contractorForm.getTelephoneNumber());
