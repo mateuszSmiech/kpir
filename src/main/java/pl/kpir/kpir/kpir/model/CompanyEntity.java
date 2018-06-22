@@ -12,19 +12,29 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "companies")
 public class CompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @OneToOne
+    private Long id;
+    @ManyToOne
+    @JoinColumn  (name = "user_id")
     private UserEntity userEntity;
-    @Column(name = "short_com_name")
+    @Column(name = "short_com_name", unique = true, nullable = false)
     private String shortCompanyName;
-    @Column(name = "full_com_name")
+    @Column(name = "full_com_name", unique = true, nullable = false)
     private String fullCompanyName;
+    @Column (unique = true, nullable = false)
     private String nip;
+    @Column (unique = true)
+    private String regon;
     @Embedded
     private Address address;
+    @Column (name = "tel_number")
+    private String telephoneNumber;
+    private String email;
+    @Column (nullable = false)
+    private boolean vat;
+    private String taxForm;
 }
