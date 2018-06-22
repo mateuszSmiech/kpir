@@ -4,9 +4,6 @@ package pl.kpir.kpir.kpir.forms;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.kpir.kpir.kpir.model.Address;
-
-import javax.persistence.Embedded;
 
 @NoArgsConstructor
 @Getter

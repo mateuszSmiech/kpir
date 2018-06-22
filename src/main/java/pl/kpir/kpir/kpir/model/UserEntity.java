@@ -1,9 +1,7 @@
 package pl.kpir.kpir.kpir.model;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +11,9 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@Builder
+
 public class UserEntity {
 
     @Id

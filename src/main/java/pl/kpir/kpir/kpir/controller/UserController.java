@@ -19,7 +19,6 @@ public class UserController {
         this.userEntityService = userEntityService;
     }
 
-
     @GetMapping(path = "/registerForm")
     public String loadRegisterForm(Model model) {
         CreateUserForm createUserForm = new CreateUserForm();

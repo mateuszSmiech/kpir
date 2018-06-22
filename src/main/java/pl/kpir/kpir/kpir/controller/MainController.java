@@ -7,8 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping(path = "/")
-    public String loadMainPage() {
+    public String loadIndexPage() {
         return "index";
+    }
+
+    @GetMapping(path = "/dashboard")
+    public String loadDashboard() {
+        return "dashboard";
+    }
+
+    @GetMapping(path = "/login")
+    public String loadLogInForm() {
+        return "loginForm";
     }
 
 }
