@@ -7,6 +7,8 @@ import pl.kpir.kpir.kpir.model.Address;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 
+import java.util.List;
+
 @Service
 public class CompanyEntityService {
 
@@ -41,5 +43,16 @@ public class CompanyEntityService {
         companyEntity.setTaxForm(companyForm.getTaxForm());
 
         return companyEntity;
+    }
+
+    public CompanyEntity findCompanyByUserId(Long id) {
+        List<CompanyEntity> byUserId = companyEntityRepository.findByUserId(id);
+        if(byUserId.size() == 0) {
+            return null;
+        } else {
+            return byUserId.get(0);
+        }
+
+
     }
 }
