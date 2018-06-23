@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Formularz logowania</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-
+<section id="login">
+    <h1 id="loginH1">Logowanie</h1>
+    <hr/>
+    <form th:action="@{/login}" method="post" id="loginForm">
+    <label> User Name : <input class="loginInput" type="text" name="username"/> </label><br/>
+    <label> Password: <input class="loginInput" type="password" name="password"/> </label><br/>
+        <button type="submit" id="loginButton">Zaloguj</button>
 </form>
+</section>
 </body>
 </html>
