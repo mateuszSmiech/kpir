@@ -1,4 +1,4 @@
-package pl.kpir.kpir;
+package pl.kpir.kpir.kpir.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/user/registerForm").permitAll()
+                .antMatchers("/","/user/registerForm","/css/*","/js/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -28,7 +28,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-        //auth provider
     }
 
     @Bean
