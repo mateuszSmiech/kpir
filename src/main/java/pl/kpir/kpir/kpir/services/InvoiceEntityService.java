@@ -33,7 +33,7 @@ public class InvoiceEntityService {
         invoiceEntity.setDate(invoiceForm.getDate());
         invoiceEntity.setNetValue(invoiceForm.getNetValue());
         invoiceEntity.setVatValue(invoiceForm.getVatValue());
-        invoiceEntity.setCostInvoice(invoiceForm.isCostInvoice());
+        invoiceEntity.setInvoiceType(invoiceForm.getInvoiceType());
 
         return invoiceEntity;
     }

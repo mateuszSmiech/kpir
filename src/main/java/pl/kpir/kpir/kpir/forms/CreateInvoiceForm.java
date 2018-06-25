@@ -14,8 +14,8 @@ import java.util.Date;
 public class CreateInvoiceForm {
 
     private String ivoiceNumber;
-    private Date date;
+    private String date;
     private BigDecimal netValue;
-    private int vatValue;
-    private boolean isCostInvoice;
+    private String vatValue;
+    private String invoiceType;
 }
