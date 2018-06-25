@@ -13,8 +13,9 @@ import java.util.Date;
 @Setter
 public class CreateInvoiceForm {
 
-    private CreateContractorForm contractor;
+    private String ivoiceNumber;
     private Date date;
     private BigDecimal netValue;
     private int vatValue;
+    private boolean isCostInvoice;
 }
