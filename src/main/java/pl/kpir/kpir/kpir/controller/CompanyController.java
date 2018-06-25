@@ -32,6 +32,6 @@ public class CompanyController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addCompany(@ModelAttribute CreateCompanyForm createCompanyForm) {
         companyEntityService.saveCompany(createCompanyForm);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
 }

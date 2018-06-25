@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dadawanie kontrahenta</title>
+    <title>Dadawanie faktury kosztowej</title>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
@@ -10,27 +10,24 @@
 </head>
 <body>
 
-<center> <b><h1> Dodawanie faktury </h1></b> </center>
+<center> <b><h1> Dodawanie faktury kosztowej</h1></b> </center>
 
 <center>
-<form th:action="@{add}" th:object="${addInvoice}" method="post">
-    Numer faktury::
-    <input type="text" th:field="*{ivoiceNumber}"/><br/>
+<form th:action="@{add}" th:object="${addCostInvoice}" method="post">
+    Numer faktury:
+    <input type="text" th:field="*{invoiceNumber}"/><br/>
     Data transakcji:
     <input type="text" id="datepicker" th:field="*{date}"/><br/>
     Wartość netto:
     <input type="text" th:field="*{netValue}"/><br/>
-    Stawka VAT
+    Stawka VAT:
     <select th:field="*{vatValue}">
         <option value="23">23%</option>
         <option value="8">8%</option>
         <option value="5">5%</option>
         <option value="0"> zw </option>
     </select><br/>
-    Rodzaj faktury (koszt/sprzedaż)
-    <select th:field="*{invoiceType}">
-        <option value="cost">Koszt</option>
-        <option value="sale">Sprzedaż</option>
+        <input th:field="*{invoiceType}" type="checkbox"  value="True"> Odlicz 50% VAT <br>
     </select><br/>
     <button type="submit">Zatwierdź</button>
 </form>

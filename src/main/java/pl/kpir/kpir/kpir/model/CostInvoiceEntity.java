@@ -15,23 +15,22 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "invoices")
-public class InvoiceEntity {
+public class CostInvoiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @ManyToOne
-//    @JoinColumn(name = "contractor_id")
-//    private ContractorEntity contractorEntity;
-//    @ManyToOne
-//    @JoinColumn(name = "company_id")
-//    private CompanyEntity companyEntity;
-
+    @ManyToOne
+    @JoinColumn(name = "contractor_id")
+    private ContractorEntity contractorEntity;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private CompanyEntity companyEntity;
     @Column (name = "number", nullable = false)
     private String ivoiceNumber;
     @Column (nullable = false)
     private String date;
     @Column (name = "netto_value", nullable = false)
-    private BigDecimal netValue;
+    private String netValue;
     @Column (name = "vat_value", nullable = false)
     private String vatValue;
     @Column (name = "voice_cost", nullable = false)

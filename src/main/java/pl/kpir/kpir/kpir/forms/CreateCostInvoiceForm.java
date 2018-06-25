@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateInvoiceForm {
+public class CreateCostInvoiceForm {
 
-    private String ivoiceNumber;
+    private String invoiceNumber;
     private String date;
-    private BigDecimal netValue;
+    private String netValue;
     private String vatValue;
     private String invoiceType;
 }
