@@ -41,7 +41,7 @@ public class ContractorEntityService {
         contractorEntity.setShortContractorName(contractorForm.getShortCompanyName());
         contractorEntity.setFullContractorName(contractorForm.getFullCompanyName());
         contractorEntity.setNip(contractorForm.getNip());
-        //TODO dodać regon
+        contractorEntity.setRegon(contractorForm.getRegon());
         contractorEntity.setAddress(address);
         contractorEntity.setTelephoneNumber(contractorForm.getTelephoneNumber());
         contractorEntity.setEmail(contractorForm.getEmail());

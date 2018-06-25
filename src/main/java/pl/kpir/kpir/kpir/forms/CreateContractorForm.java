@@ -11,6 +11,7 @@ public class CreateContractorForm {
     private String shortCompanyName;
     private String fullCompanyName;
     private String nip;
+    private String regon;
     private String street;
     private String postCode;
     private String city;
