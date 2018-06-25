@@ -48,7 +48,7 @@ public class ContractorController {
         List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("contractorList", contractorList);
 
-        return "contractorList";
+        return "/contractorList";
     }
 }
 

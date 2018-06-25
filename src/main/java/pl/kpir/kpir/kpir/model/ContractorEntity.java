@@ -21,11 +21,11 @@ public class ContractorEntity {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private CompanyEntity companyId;
-    @Column(name = "short_con_name", unique = true, nullable = false)
+    @Column(name = "short_con_name", nullable = false)
     private String shortContractorName;
-    @Column(name = "full_con_name", unique = true, nullable = false)
+    @Column(name = "full_con_name", nullable = false)
     private String fullContractorName;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String nip;
     @Column(unique = true)
     private String regon;
