@@ -1,5 +1,6 @@
 package pl.kpir.kpir.kpir.services;
 
+import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.forms.CreateInvoiceForm;
 import pl.kpir.kpir.kpir.model.Address;
@@ -7,6 +8,8 @@ import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.model.InvoiceEntity;
 import pl.kpir.kpir.kpir.repositories.InvoiceEntityRepository;
 
+
+@Service
 public class InvoiceEntityService {
 
     private final InvoiceEntityRepository invoiceEntityRepository;
