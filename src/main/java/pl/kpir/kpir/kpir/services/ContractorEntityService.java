@@ -5,10 +5,12 @@ import pl.kpir.kpir.kpir.forms.CreateCompanyForm;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.model.Address;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
+import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ContractorEntityService {
@@ -42,8 +44,20 @@ public class ContractorEntityService {
         return contractorEntity;
     }
 
-    public List<ContractorEntity> findByCompanyId(Long id) {
-        return contractorEntityRepository.findByCompanyId(id);
+    private ContractorDTO convertToContractorDTO(ContractorEntity contractorEntity) {
+        return ContractorDTO.builder()
+                .fullContractorName(contractorEntity.getFullContractorName())
+                .shortContractorName(contractorEntity.getShortContractorName())
+                .email(contractorEntity.getEmail())
+                .nip(contractorEntity.getNip())
+                .regon(contractorEntity.getRegon())
+                .telephoneNumber(contractorEntity.getTelephoneNumber())
+                .address(contractorEntity.getAddress())
+                .build();
+    }
+
+    public List<ContractorDTO> findByCompanyId(Long id) {
+        return contractorEntityRepository.findByCompanyId(id).stream().map(this::convertToContractorDTO).collect(Collectors.toList());
     }
 }
 

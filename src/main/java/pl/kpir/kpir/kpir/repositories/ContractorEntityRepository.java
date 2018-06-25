@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface ContractorEntityRepository  extends JpaRepository<ContractorEntity, Long> {
 
-    @Query("SELECT contr FROM ContractorEntity contr INNER JOIN contr.companyId com INNER JOIN com.userId u WHERE u.id=:userId")
+    @Query("SELECT contr FROM ContractorEntity contr INNER JOIN contr.companyId com INNER JOIN com.userEntity u WHERE u.id=:userId")
     List<ContractorEntity> findByCompanyId(@Param("userId") Long id );
 
 }

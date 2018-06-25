@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista kontrachentów</title>
+</head>
+<body>
+
+<table border =1>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+    <tr th:each="contractor : ${contractorList}">
+        <td th:text="${contractor.getFullContractorName()}"></td>
+        <td th:text="${contractor.getShortContractorName()}"></td>
+        <td th:text="${contractor.getNip()}"></td>
+        <td th:text="${contractor.getRegon()}"></td>
+        <td th:text="${contractor.getTelephoneNumber()}"></td>
+        <td th:text="${contractor.getAddress().getStreet()}"></td>
+        <td th:text="${contractor.getAddress().getCity()}"></td>
+        <td th:text="${contractor.getAddress().getCountry()}"></td>
+        <td th:text="${contractor.getAddress().getPostCode()}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

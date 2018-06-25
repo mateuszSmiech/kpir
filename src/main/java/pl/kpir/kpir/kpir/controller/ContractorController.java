@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
+import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
@@ -16,7 +17,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "/contractor")
-
 public class ContractorController {
 
     private final ContractorEntityService contractorEntityService;
@@ -38,17 +38,15 @@ public class ContractorController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addContractor(@ModelAttribute CreateContractorForm createContractorForm) {
         contractorEntityService.saveContractor(createContractorForm);
-        return "redirect:/";
+        return "redirect:/contractorList";
     }
 
-    @RequestMapping(path = "/contractorList", method = RequestMethod.POST)
+    @GetMapping(path = "/contractorList")
     public String contractorList(Model model) {
         Long loggedInUserId = userUtils.getLoggedInUserId();
 
-        List<ContractorEntity> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
+        List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("contractorList", contractorList);
-
-
 
         return "contractorList";
     }
