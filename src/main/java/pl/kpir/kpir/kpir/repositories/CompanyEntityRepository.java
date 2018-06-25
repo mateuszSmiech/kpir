@@ -15,4 +15,5 @@ public interface CompanyEntityRepository extends JpaRepository<CompanyEntity, Lo
 
     @Query("SELECT com FROM CompanyEntity com inner join com.userEntity u WHERE u.id=:userId")
     List<CompanyEntity> findByUserId(@Param("userId") Long id);
+
 }

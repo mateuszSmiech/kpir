@@ -19,11 +19,13 @@ public class CompanyEntityService {
 
     private final CompanyEntityRepository companyEntityRepository;
     private final UserEntityRepository userEntityRepository;
+    private final UserUtils userUtils;
 
 
-    public CompanyEntityService(CompanyEntityRepository companyEntityRepository, UserEntityRepository userEntityRepository) {
+    public CompanyEntityService(CompanyEntityRepository companyEntityRepository, UserEntityRepository userEntityRepository, UserUtils userUtils) {
         this.companyEntityRepository = companyEntityRepository;
         this.userEntityRepository = userEntityRepository;
+        this.userUtils = userUtils;
     }
 
 
@@ -34,8 +36,7 @@ public class CompanyEntityService {
 
     private CompanyEntity convertToCompanyEntity(CreateCompanyForm companyForm) {
 
-        CustomUser principal = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long id = principal.getUserEntity().getId();
+        Long id =  userUtils.getLoggedInUserId();
         Optional<UserEntity> byId = userEntityRepository.findById(id);
         UserEntity userEntity = byId.orElse(null);
 

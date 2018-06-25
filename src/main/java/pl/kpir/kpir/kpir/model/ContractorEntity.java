@@ -20,7 +20,7 @@ public class ContractorEntity {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private UserEntity userEntity;
+    private UserEntity companyId;
     @Column(name = "short_con_name", unique = true, nullable = false)
     private String shortContractorName;
     @Column(name = "full_con_name", unique = true, nullable = false)

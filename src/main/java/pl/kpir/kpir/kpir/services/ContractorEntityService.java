@@ -8,6 +8,8 @@ import pl.kpir.kpir.kpir.model.CompanyEntity;
 import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 
+import java.util.List;
+
 @Service
 public class ContractorEntityService {
 
@@ -38,6 +40,10 @@ public class ContractorEntityService {
         contractorEntity.setEmail(contractorForm.getEmail());
 
         return contractorEntity;
+    }
+
+    public List<ContractorEntity> findByCompanyId(Long id) {
+        return contractorEntityRepository.findByCompanyId(id);
     }
 }
 
