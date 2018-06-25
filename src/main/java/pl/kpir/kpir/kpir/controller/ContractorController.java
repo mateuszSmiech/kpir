@@ -38,7 +38,7 @@ public class ContractorController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addContractor(@ModelAttribute CreateContractorForm createContractorForm) {
         contractorEntityService.saveContractor(createContractorForm);
-        return "redirect:/contractorList";
+        return "redirect:contractorList";
     }
 
     @GetMapping(path = "/contractorList")
@@ -48,7 +48,7 @@ public class ContractorController {
         List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("contractorList", contractorList);
 
-        return "/contractorList";
+        return "contractorList";
     }
 }
 
