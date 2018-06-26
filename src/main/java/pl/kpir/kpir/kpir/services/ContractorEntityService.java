@@ -24,6 +24,10 @@ public class ContractorEntityService {
     }
 
     private ContractorEntity convertToContractorEntity(CreateContractorForm contractorForm) {
+
+
+
+
         Address address = new Address();
         address.setStreet(contractorForm.getStreet());
         address.setPostCode(contractorForm.getPostCode());
@@ -37,10 +41,7 @@ public class ContractorEntityService {
         contractorEntity.setTelephoneNumber(contractorForm.getTelephoneNumber());
         contractorEntity.setEmail(contractorForm.getEmail());
 
+
         return contractorEntity;
     }
 }
-
-
-
-

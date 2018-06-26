@@ -8,4 +8,10 @@ import pl.kpir.kpir.kpir.model.ContractorEntity;
 
 @Repository
 public interface ContractorEntityRepository  extends JpaRepository<ContractorEntity, Long> {
+
+
+
 }
+
+
+

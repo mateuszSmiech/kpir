@@ -18,4 +18,14 @@ public class CreateCostInvoiceForm {
     private String netValue;
     private String vatValue;
     private String invoiceType;
+
+//    private String shortCompanyName;
+//    private String fullCompanyName;
+//    private String nip;
+//    private String street;
+//    private String postCode;
+//    private String city;
+//    private String country;
+//    private String telephoneNumber;
+//    private String email;
 }

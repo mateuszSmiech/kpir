@@ -27,9 +27,14 @@
         <option value="5">5%</option>
         <option value="0"> zw </option>
     </select><br/>
-        <input th:field="*{invoiceType}" type="checkbox"  value="True"> Odlicz 50% VAT <br>
+    Wybierz rodzaj odliczenia:
+    <select th:field="*{invoiceType}">
+        <option value="True">pełny VAT</option>
+        <option value="False">50% VAT</option>
     </select><br/>
+
     <button type="submit">Zatwierdź</button>
+
 </form>
 </center>
 

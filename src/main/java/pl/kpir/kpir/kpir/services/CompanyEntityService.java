@@ -66,7 +66,5 @@ public class CompanyEntityService {
         } else {
             return byUserId.get(0);
         }
-
-
     }
 }

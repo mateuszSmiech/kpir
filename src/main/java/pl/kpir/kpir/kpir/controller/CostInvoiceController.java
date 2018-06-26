@@ -10,16 +10,14 @@ import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
 
 @Controller
-@RequestMapping(path = "/costInvoice")
+@RequestMapping(path = "/invoice")
 public class CostInvoiceController {
-
 
     private final CostInvoiceEntityService costInvoiceEntityService;
 
     public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService) {
         this.costInvoiceEntityService = costInvoiceEntityService;
     }
-
 
     @GetMapping(path = "/addCostInvoice")
     public String loadInvoice(Model model) {
@@ -33,6 +31,8 @@ public class CostInvoiceController {
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
         return "redirect:/";
     }
+
+
 
 
 

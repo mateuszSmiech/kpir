@@ -10,11 +10,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
+
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "invoices")
+@Table(name = "costInvoices")
 public class CostInvoiceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,14 +26,14 @@ public class CostInvoiceEntity {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private CompanyEntity companyEntity;
-    @Column (name = "number", nullable = false)
-    private String ivoiceNumber;
+    @Column (name = "number")
+    private String invoiceNumber;
     @Column (nullable = false)
     private String date;
-    @Column (name = "netto_value", nullable = false)
+    @Column (name = "netto_value")
     private String netValue;
-    @Column (name = "vat_value", nullable = false)
+    @Column (name = "vat_value")
     private String vatValue;
-    @Column (name = "voice_cost", nullable = false)
+    @Column (name = "invoice_cost")
     private String invoiceType;
 }
