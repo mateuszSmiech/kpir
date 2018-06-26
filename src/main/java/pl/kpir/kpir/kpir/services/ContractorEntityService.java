@@ -25,7 +25,6 @@ public class ContractorEntityService {
         this.userUtils = userUtils;
     }
 
-
     public void saveContractor(CreateContractorForm contractorForm) {
         ContractorEntity contractor = convertToContractorEntity(contractorForm);
         contractorEntityRepository.save(contractor);
