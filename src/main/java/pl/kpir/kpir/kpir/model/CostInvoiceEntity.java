@@ -25,7 +25,7 @@ public class CostInvoiceEntity {
     private ContractorEntity contractorEntity;
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private CompanyEntity companyEntity;
+    private CompanyEntity companyId;
     @Column (name = "number")
     private String invoiceNumber;
     @Column (nullable = false)
