@@ -21,12 +21,16 @@
         <div class="card-header">
             <i class="fa fa-table"></i> Lista Kontrachentów</div>
         <div class="card-body">
+            <div>
+                <a class="btn btn-primary" th:href="@{/contractor/addContractor}" style="margin-bottom:20px; ">Dodaj kontachenta</a>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>Nazwa skrócona</th>
                         <th>NIP</th>
+                        <th>E-mail</th>
                         <th>Szczegóły</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
@@ -37,6 +41,7 @@
                     <tr>
                         <th>Nazwa skrócona</th>
                         <th>NIP</th>
+                        <th>E-mail</th>
                         <th>Szczegóły</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
@@ -46,12 +51,11 @@
                     <tr th:each="contractor : ${contractorList}">
                         <td th:text="${contractor.getShortContractorName()}"></td>
                         <td th:text="${contractor.getNip()}"></td>
-                        <td>Szczegóły</td>
-                        <td>Edytuj</td>
-                        <td>Usuń</td>
-
+                        <td th:text="${contractor.getEmail()}"></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>

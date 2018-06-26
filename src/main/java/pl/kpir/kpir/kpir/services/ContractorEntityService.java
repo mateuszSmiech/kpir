@@ -53,6 +53,7 @@ public class ContractorEntityService {
 
     private ContractorDTO convertToContractorDTO(ContractorEntity contractorEntity) {
         return ContractorDTO.builder()
+                .id(contractorEntity.getId())
                 .fullContractorName(contractorEntity.getFullContractorName())
                 .shortContractorName(contractorEntity.getShortContractorName())
                 .email(contractorEntity.getEmail())
