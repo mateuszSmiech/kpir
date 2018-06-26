@@ -2,7 +2,9 @@ package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
+import pl.kpir.kpir.kpir.model.CompanyEntity;
 import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
+import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.SalesInvoiceEntityRepository;
 
 
@@ -11,9 +13,13 @@ import pl.kpir.kpir.kpir.repositories.SalesInvoiceEntityRepository;
 public class SalesInvoiceEntityService {
 
     private final SalesInvoiceEntityRepository salesInvoiceEntityRepository;
+    private final UserUtils userUtils;
+    private final CompanyEntityRepository companyEntityRepository;
 
-    public SalesInvoiceEntityService(SalesInvoiceEntityRepository salesInvoiceEntityRepository) {
+    public SalesInvoiceEntityService(SalesInvoiceEntityRepository salesInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository) {
         this.salesInvoiceEntityRepository = salesInvoiceEntityRepository;
+        this.userUtils = userUtils;
+        this.companyEntityRepository = companyEntityRepository;
     }
 
     public void saveInvoice(CreateSalesInvoiceForm invoiceForm) {
@@ -24,11 +30,13 @@ public class SalesInvoiceEntityService {
     private SalesInvoiceEntity convertToSalesInvoiceEntity(CreateSalesInvoiceForm invoiceForm) {
 
         SalesInvoiceEntity salesInvoiceEntity = new SalesInvoiceEntity();
+        CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
 
         salesInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
         salesInvoiceEntity.setDate(invoiceForm.getDate());
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
+        salesInvoiceEntity.setCompanyId(companyByUserId);
 
         return salesInvoiceEntity;
     }
