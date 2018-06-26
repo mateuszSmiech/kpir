@@ -1,6 +1,6 @@
 //datepicker
 $( function() {
-    $( "#datepicker" ).datepicker({
+    $( "#exampleConfirmPassword" ).datepicker({
         dateFormat: "yy-mm-dd"
     });
 } );

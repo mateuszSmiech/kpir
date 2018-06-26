@@ -2,18 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Formularz logowania</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+    <!-- Custom styles for this template-->
+    <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
 </head>
-<body>
-<section id="login">
-    <h1 id="loginH1">Logowanie</h1>
-    <hr/>
-    <form th:action="@{/login}" method="post" id="loginForm">
-    <label> User Name : <input class="loginInput" type="text" name="username"/> </label><br/>
-    <label> Password: <input class="loginInput" type="password" name="password"/> </label><br/>
-        <button type="submit" id="loginButton">Zaloguj</button>
-</form>
-</section>
+<body class="bg-dark">
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Adres e-mail</label>
+                    <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Hasło</label>
+                    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" name="password">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary btn-block">Zaloguj</button>
+            </form>
+            <div class="text-center">
+                <a class="d-block small mt-3" th:href="@{/registerForm}">Zarejestruj się!</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<!-- Core plugin JavaScript-->
+<script th:src="@{/js/jquery.easing.min.js}"></script>
 </body>
 </html>

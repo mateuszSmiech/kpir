@@ -3,32 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Strona główna</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
 <main>
     <nav>
         <h1>Książka przychodów i rozchodów</h1>
-        <a th:href="@{login}">ZALOGUJ</a>
-        <a th:href="@{user/registerForm}">ZAREJESTRUJ</a>
+        <a class="btn btn-primary" th:href="@{login}">ZALOGUJ</a>
+        <a class="btn btn-primary" th:href="@{user/registerForm}">ZAREJESTRUJ</a>
     </nav>
-    <section id="mainphoto">
-    </section>
-
-    <section class="description">
-        <p>Program służyć będzie do prowadzenia książki przychodów i rozchodów. Będzie zawierać następujące funkcjonalności:</p>
-        <ul>
-            <li>wprowadzanie faktur sprzedażowych/zakupowych do systemu,</li>
-            <li>ewidencje VAT, zakup/sprzedaż</li>
-            <li>rejestr kontrahentów</li>
-            <li>panel główny na którym można podejrzeć aktualny stan firmy</li>
-            <li> generowanie raportów miesięcznych i rocznych,</li>
-        </ul>
-    </section>
-
-    <footer>
-        Copyrights ...
-    </footer>
 
 </main>
 

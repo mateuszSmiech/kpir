@@ -28,7 +28,6 @@ public class CompanyController {
         return "registerCompany";
     }
 
-    //TODO zmiana redirecta na /dashboard
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addCompany(@ModelAttribute CreateCompanyForm createCompanyForm) {
         companyEntityService.saveCompany(createCompanyForm);

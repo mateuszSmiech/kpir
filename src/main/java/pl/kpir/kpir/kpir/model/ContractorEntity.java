@@ -14,18 +14,17 @@ import javax.persistence.*;
 @Table(name = "contractors")
 public class ContractorEntity {
 
-    //TODO add company id to contractor
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private UserEntity userEntity;
-    @Column(name = "short_con_name", unique = true, nullable = false)
+    private CompanyEntity companyId;
+    @Column(name = "short_con_name", nullable = false)
     private String shortContractorName;
-    @Column(name = "full_con_name", unique = true, nullable = false)
+    @Column(name = "full_con_name", nullable = false)
     private String fullContractorName;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String nip;
     @Column(unique = true)
     private String regon;
