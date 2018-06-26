@@ -13,92 +13,7 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="/dashboard">Książka przychodów i rozchodów</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Panel Główny">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Panel Główny</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury zakupowe">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-area-chart"></i>
-                    <span class="nav-link-text">Faktury zakupowe</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury sprzedażowe">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Faktury sprzedażowe</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Książka">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Książka</span>
-                </a>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ewidencja VAT">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Ewidencja VAT</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Kontrachent">
-                <a class="nav-link" href="/contractor/contractorList">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Kontrachent</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ewidencja ZUS">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Ewidencja ZUS</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Raporty">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Raporty</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Ustawienia">
-                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">Ustawienia</span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                        <a href="#">Ustawienia użytkownika</a>
-                    </li>
-                    <li>
-                        <a href="#">Ustawienia firmy</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="navbar-nav sidenav-toggler">
-            <li class="nav-item">
-                <a class="nav-link text-center" id="sidenavToggler">
-                    <i class="fa fa-fw fa-angle-left"></i>
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav" th:replace="navBar :: nav"></nav>
 <div class="content-wrapper">
 <div class="container-fluid">
     <!-- Example DataTables Card-->
@@ -106,12 +21,16 @@
         <div class="card-header">
             <i class="fa fa-table"></i> Lista Kontrachentów</div>
         <div class="card-body">
+            <div>
+                <a class="btn btn-primary" th:href="@{/contractor/addContractor}" style="margin-bottom:20px; ">Dodaj kontachenta</a>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
                         <th>Nazwa skrócona</th>
                         <th>NIP</th>
+                        <th>E-mail</th>
                         <th>Szczegóły</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
@@ -122,6 +41,7 @@
                     <tr>
                         <th>Nazwa skrócona</th>
                         <th>NIP</th>
+                        <th>E-mail</th>
                         <th>Szczegóły</th>
                         <th>Edytuj</th>
                         <th>Usuń</th>
@@ -131,12 +51,11 @@
                     <tr th:each="contractor : ${contractorList}">
                         <td th:text="${contractor.getShortContractorName()}"></td>
                         <td th:text="${contractor.getNip()}"></td>
-                        <td>Szczegóły</td>
-                        <td>Edytuj</td>
-                        <td>Usuń</td>
-
+                        <td th:text="${contractor.getEmail()}"></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>
+                        <td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>
                     </tr>
-
                     </tbody>
                 </table>
             </div>

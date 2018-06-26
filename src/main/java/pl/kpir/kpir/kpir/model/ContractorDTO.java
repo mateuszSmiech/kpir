@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ContractorDTO {
 
+    private Long id;
     private String shortContractorName;
     private String fullContractorName;
     private String nip;
