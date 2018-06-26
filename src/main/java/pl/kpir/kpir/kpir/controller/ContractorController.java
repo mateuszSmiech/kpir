@@ -2,10 +2,7 @@ package pl.kpir.kpir.kpir.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.ContractorEntity;
@@ -49,6 +46,11 @@ public class ContractorController {
         model.addAttribute("contractorList", contractorList);
 
         return "contractorList";
+    }
+    @GetMapping(path ="/{id}/delete")
+    public String deleteContractor(@PathVariable Long id) {
+        contractorEntityService.deleteById(id);
+        return "redirect:/contractor/contractorList";
     }
 }
 

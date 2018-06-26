@@ -67,6 +67,10 @@ public class ContractorEntityService {
     public List<ContractorDTO> findByCompanyId(Long id) {
         return contractorEntityRepository.findByCompanyId(id).stream().map(this::convertToContractorDTO).collect(Collectors.toList());
     }
+
+    public void deleteById(Long id) {
+        contractorEntityRepository.deleteById(id);
+    }
 }
 
 
