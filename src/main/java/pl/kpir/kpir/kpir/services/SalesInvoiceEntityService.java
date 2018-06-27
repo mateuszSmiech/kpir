@@ -39,6 +39,8 @@ public class SalesInvoiceEntityService {
         salesInvoiceEntity.setDate(invoiceForm.getDate());
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
+        salesInvoiceEntity.setVatAmount(invoiceForm.getVatAmount());
+        salesInvoiceEntity.setInvoiceAmount(invoiceForm.getInvoiceAmount());
         salesInvoiceEntity.setCompanyId(companyByUserId);
         salesInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(invoiceForm.getContractorId()));
 

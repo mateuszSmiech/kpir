@@ -26,9 +26,12 @@ public class SalesInvoiceEntity {
     private String invoiceNumber;
     @Column (nullable = false)
     private String date;
-    @Column (name = "netto_value")
+    @Column (name = "netto_amount")
     private String netValue;
     @Column (name = "vat_value")
     private String vatValue;
-
+    @Column (name = "vat_amount")
+    private String vatAmount;
+    @Column (name = "invoice_amount")
+    private String invoiceAmount;
 }

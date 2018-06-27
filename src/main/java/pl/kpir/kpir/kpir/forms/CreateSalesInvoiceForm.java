@@ -18,6 +18,8 @@ public class CreateSalesInvoiceForm {
     private String date;
     private String netValue;
     private String vatValue;
+    private String vatAmount;
+    private String invoiceAmount;
     private Long contractorId;
 
 }
