@@ -1,6 +1,7 @@
 package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
+import pl.kpir.kpir.kpir.exception.ContractorNotFoundException;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.model.Address;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
@@ -10,6 +11,7 @@ import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,6 +71,13 @@ public class ContractorEntityService {
 
     public void deleteById(Long id) {
         contractorEntityRepository.deleteById(id);
+    }
+
+    public ContractorDTO findById(Long id) {
+        return convertToContractorDTO(contractorEntityRepository.findById(id).orElse(null));
+    }
+
+    private void validateEntry(Long id) {
     }
 }
 
