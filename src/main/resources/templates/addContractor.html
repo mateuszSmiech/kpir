@@ -24,7 +24,7 @@
             <div class="card-body">
 
 <h1> Formularz dodawania nowego kontrahenta</h1>
-<form th:action="@{add}" th:object="${addContractor}" method="post">
+<form th:action="@{(${returnTo} ? 'add?returnTo=' + ${returnTo}: 'add')}" th:object="${addContractor}" method="post">
     Skócona nazwa firmy:
     <input type="text" th:field="*{shortCompanyName}"/><br/>
     Pełna nazwa firmy:

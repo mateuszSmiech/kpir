@@ -24,17 +24,27 @@ public class ContractorController {
         this.userUtils = userUtils;
     }
 
-
+    //"addContractor?returnTo=addInvoice"
     @GetMapping(path = "/addContractor")
-    public String loadRegisterCompany(Model model) {
+    public String loadRegisterCompany(@RequestParam(name = "returnTo", required = false) String returnTo, Model model) {
         CreateContractorForm createContractorForm = new CreateContractorForm();
         model.addAttribute("addContractor", createContractorForm);
+
+        if (returnTo != null) {
+            model.addAttribute("returnTo", returnTo);
+        }
         return "addContractor";
     }
 
+    //"add?returnTo=${returnTo}
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm) {
+    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm, Model model,
+        @RequestParam(name = "returnTo", required = false) String returnTo) {
         contractorEntityService.saveContractor(createContractorForm);
+        model.toString();
+        if (returnTo != null) {
+            return "redirect:" + returnTo;
+        }
         return "redirect:contractorList";
     }
 
