@@ -62,6 +62,18 @@ public class ContractorController {
         contractorEntityService.deleteById(id);
         return "redirect:/contractor/contractorList";
     }
+
+    @GetMapping(path = "/{id}/contractorDetails")
+    public String contractorDetails(@PathVariable Long id, Model model) {
+        ContractorDTO contractor = contractorEntityService.findById(id);
+        model.addAttribute("contractor", contractor);
+        return "contractorDetails";
+    }
+
+    @GetMapping(path="/{id}/editContractor")
+    public String editContractor(@PathVariable Long id, Model model) {
+        return "editContractorForm";
+    }
 }
 
 
