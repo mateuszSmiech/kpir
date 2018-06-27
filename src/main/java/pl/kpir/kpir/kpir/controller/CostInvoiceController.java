@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
+import pl.kpir.kpir.kpir.model.ContractorDTO;
+import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/costInvoice")
@@ -15,9 +19,10 @@ public class CostInvoiceController {
 
     private final CostInvoiceEntityService costInvoiceEntityService;
 
+
     public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService) {
         this.costInvoiceEntityService = costInvoiceEntityService;
-    }
+}
 
     @GetMapping(path = "/addCostInvoice")
     public String loadInvoice(Model model) {
@@ -29,6 +34,12 @@ public class CostInvoiceController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addInvoice(@ModelAttribute CreateCostInvoiceForm createCostInvoiceForm) {
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
-        return "redirect:/";
+        return "redirect:/dashboard";
     }
+
+
+
+
+
+
 }

@@ -30,4 +30,5 @@ public class SalesInvoiceEntity {
     private String netValue;
     @Column (name = "vat_value")
     private String vatValue;
+
 }
