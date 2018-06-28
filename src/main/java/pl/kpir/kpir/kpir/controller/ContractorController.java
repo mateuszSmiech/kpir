@@ -36,12 +36,10 @@ public class ContractorController {
         return "addContractor";
     }
 
-    //"add?returnTo=${returnTo}
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm, Model model,
+    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm,
         @RequestParam(name = "returnTo", required = false) String returnTo) {
         contractorEntityService.saveContractor(createContractorForm);
-        model.toString();
         if (returnTo != null) {
             return "redirect:" + returnTo;
         }
