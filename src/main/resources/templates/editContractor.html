@@ -21,27 +21,28 @@
             <div class="card-header">
                 <i class="fa fa-table"></i> Lista Kontrachentów</div>
             <div class="card-body">
-                <form th:action="@{add}" th:object="${addContractor}" method="post">
+                <form th:action="@{/contractor/edit}" th:object="${editContractor}" method="post">
+                    <input type="hidden" name="id" th:value="${currentContractor.id}"/>
                     Skócona nazwa firmy:
-                    <input type="text" th:field="*{shortCompanyName}"/><br/>
+                    <input type="text" name="shortCompanyName" th:value="${currentContractor.shortContractorName}"/><br/>
                     Pełna nazwa firmy:
-                    <input type="text" th:field="*{fullCompanyName}"/><br/>
+                    <input type="text" name="fullCompanyName" th:value="${currentContractor.fullContractorName}"/><br/>
                     Wprowadź nip:
-                    <input type="text" th:field="*{nip}"/><br/>
+                    <input type="text" name="nip" th:value="${currentContractor.nip}"/><br/>
                     Wprowadź regon:
-                    <input type="text" th:field="*{regon}"/><br/>
+                    <input type="text" name="regon" th:value="${currentContractor.regon}"/><br/>
                     Podaj ulicę:
-                    <input type="text" th:field="*{street}"/><br/>
+                    <input type="text" name="street" th:value="${currentContractor.getAddress().getStreet()}"/><br/>
                     Podaj kod pocztowy:
-                    <input type="text" th:field="*{postCode}"/><br/>
+                    <input type="text" name="postCode" th:value="${currentContractor.getAddress().getPostCode()}"/><br/>
                     Podaj miasto:
-                    <input type="text" th:field="*{city}"/><br/>
+                    <input type="text" name="city" th:value="${currentContractor.getAddress().getCity()}"/><br/>
                     Podaj kraj:
-                    <input type="text" th:field="*{country}"/><br/>
+                    <input type="text" name="country" th:value="${currentContractor.getAddress().getCountry()}"/><br/>
                     Wprowadź numer telefonu:
-                    <input type="text" th:field="*{telephoneNumber}"/><br/>
+                    <input type="text" name="telephoneNumber" th:value="${currentContractor.telephoneNumber}"/><br/>
                     Wprowadź email:
-                    <input type="text" th:field="*{email}"/><br/>
+                    <input type="text" name="email" th:value="${currentContractor.email}"/><br/>
                     <button type="submit">Zapisz</button>
                 </form>
                 </div>
