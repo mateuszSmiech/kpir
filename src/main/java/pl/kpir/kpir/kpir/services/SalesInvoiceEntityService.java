@@ -49,7 +49,7 @@ public class SalesInvoiceEntityService {
         return salesInvoiceEntity;
     }
 
-    private SalesInvoiceDTO convertToSalesinvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
+    private SalesInvoiceDTO convertToSalesInvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
         return SalesInvoiceDTO.builder()
                 .id(salesInvoiceEntity.getId())
                 .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
@@ -62,6 +62,6 @@ public class SalesInvoiceEntityService {
     }
 
     public List<SalesInvoiceDTO> findByCompanyId(Long id) {
-        return salesInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToSalesinvoicesDTO).collect(Collectors.toList());
+        return salesInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
     }
 }

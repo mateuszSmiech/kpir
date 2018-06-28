@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
+import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
@@ -46,7 +47,14 @@ public class CostInvoiceController {
     }
 
 
+    @GetMapping(path = "/costList")
+    public String salesList(Model model) {
+        Long loggedInUserId = userUtils.getLoggedInUserId();
 
+        List<CostInvoiceDTO> costInvoiceList = costInvoiceEntityService.findByCompanyId(loggedInUserId);
+        model.addAttribute("costList", costInvoiceList);
+        return "costList";
+    }
 
 
 
