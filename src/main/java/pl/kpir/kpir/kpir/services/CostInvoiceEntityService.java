@@ -3,10 +3,14 @@ package pl.kpir.kpir.kpir.services;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
+import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -45,4 +49,18 @@ public class CostInvoiceEntityService {
     }
 
 
+    private CostInvoiceDTO convertToCostInvoicesDTO(CostInvoiceEntity costInvoiceEntity) {
+        return CostInvoiceDTO.builder()
+                .id(costInvoiceEntity.getId())
+                .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
+                .date(costInvoiceEntity.getDate())
+                .netValue(costInvoiceEntity.getNetValue())
+                .build();
+    }
+
+    public List<CostInvoiceDTO> findByCompanyId(Long id) {
+
+        return costInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
+
+    }
 }

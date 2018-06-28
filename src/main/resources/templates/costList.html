@@ -22,7 +22,7 @@
                 <i class="fa fa-table"></i> Lista faktur sprzedażowych</div>
             <div class="card-body">
                 <div>
-                    <a class="btn btn-primary" th:href="@{/salesInvoice/addSalesInvoice}" style="margin-bottom:20px; ">Dodaj fakture sprzedażową</a>
+                    <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px; ">Dodaj fakture zakupową</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -48,10 +48,10 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <tr th:each="saleInvoice : ${salesList}">
-                            <td th:text="${saleInvoice.getInvoiceNumber()}"></td>
-                            <td th:text="${saleInvoice.getDate()}"></td>
-                            <td th:text="${saleInvoice.netValue}"></td>
+                        <tr th:each="costInvoice : ${costList}">
+                            <td th:text="${costInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${costInvoice.getDate()}"></td>
+                            <td th:text="${costInvoice.netValue}"></td>
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>-->
