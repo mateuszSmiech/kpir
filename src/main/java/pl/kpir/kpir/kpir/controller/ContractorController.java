@@ -76,6 +76,7 @@ public class ContractorController {
     }
     @PostMapping(path = "/edit")
     public String editContractor(@ModelAttribute EditContractorForm editContractorForm) {
+        contractorEntityService.editContractor(editContractorForm);
         return "redirect:/contractorList";
     }
 }

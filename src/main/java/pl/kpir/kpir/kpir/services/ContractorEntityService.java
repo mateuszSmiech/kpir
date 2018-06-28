@@ -89,7 +89,6 @@ public class ContractorEntityService {
         contractorEntity.setEmail(editContractorForm.getEmail());
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         contractorEntity.setCompanyId(companyByUserId);
-
         contractorEntityRepository.save(contractorEntity);
     }
 
