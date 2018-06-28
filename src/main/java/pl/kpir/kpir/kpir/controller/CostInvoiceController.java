@@ -10,6 +10,7 @@ import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
+import pl.kpir.kpir.kpir.services.UserUtils;
 
 import java.util.List;
 
@@ -18,16 +19,23 @@ import java.util.List;
 public class CostInvoiceController {
 
     private final CostInvoiceEntityService costInvoiceEntityService;
+    private final ContractorEntityService contractorEntityService;
+    private final UserUtils userUtils;
 
 
-    public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService) {
+    public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService, ContractorEntityService contractorEntityService, UserUtils userUtils) {
         this.costInvoiceEntityService = costInvoiceEntityService;
-}
+        this.contractorEntityService = contractorEntityService;
+        this.userUtils = userUtils;
+    }
 
     @GetMapping(path = "/addCostInvoice")
     public String loadInvoice(Model model) {
         CreateCostInvoiceForm createCostInvoiceForm = new CreateCostInvoiceForm();
         model.addAttribute("addCostInvoice", createCostInvoiceForm);
+        Long loggedInUserId = userUtils.getLoggedInUserId();
+        List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
+        model.addAttribute("contractorList", contractorList);
         return "addCostInvoice";
     }
 

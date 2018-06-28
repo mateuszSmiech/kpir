@@ -2,12 +2,13 @@ package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
-import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
-import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
+import pl.kpir.kpir.kpir.model.*;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 import pl.kpir.kpir.kpir.repositories.SalesInvoiceEntityRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -46,5 +47,21 @@ public class SalesInvoiceEntityService {
 
 
         return salesInvoiceEntity;
+    }
+
+    private SalesInvoiceDTO convertToSalesinvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
+        return SalesInvoiceDTO.builder()
+                .id(salesInvoiceEntity.getId())
+                .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
+                .date(salesInvoiceEntity.getDate())
+                .netValue(salesInvoiceEntity.getNetValue())
+                .vatValue(salesInvoiceEntity.getVatValue())
+                .vatAmount(salesInvoiceEntity.getVatAmount())
+                .invoiceAmount(salesInvoiceEntity.getInvoiceAmount())
+                .build();
+    }
+
+    public List<SalesInvoiceDTO> findByCompanyId(Long id) {
+        return salesInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToSalesinvoicesDTO).collect(Collectors.toList());
     }
 }

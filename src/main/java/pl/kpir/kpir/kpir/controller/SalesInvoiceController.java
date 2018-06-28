@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
+import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.SalesInvoiceEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
@@ -42,6 +43,15 @@ public class SalesInvoiceController {
     public String addInvoice(@ModelAttribute CreateSalesInvoiceForm createSalesInvoiceForm) {
         salesInvoiceEntityService.saveInvoice(createSalesInvoiceForm);
         return "redirect:/dashboard";
+    }
+
+    @GetMapping(path = "/salesList")
+    public String salesList(Model model) {
+        Long loggedInUserId = userUtils.getLoggedInUserId();
+
+        List<SalesInvoiceDTO> salesInvoiceList = salesInvoiceEntityService.findByCompanyId(loggedInUserId);
+        model.addAttribute("salesList", salesInvoiceList);
+        return "salesList";
     }
 
 

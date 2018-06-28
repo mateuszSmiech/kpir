@@ -3,15 +3,10 @@ package pl.kpir.kpir.kpir.services;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.ContractorDTO;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -20,11 +15,13 @@ public class CostInvoiceEntityService {
     private final CostInvoiceEntityRepository costInvoiceEntityRepository;
     private final UserUtils userUtils;
     private final CompanyEntityRepository companyEntityRepository;
+    private final ContractorEntityRepository contractorEntityRepository;
 
-    public CostInvoiceEntityService(CostInvoiceEntityRepository costInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository) {
+    public CostInvoiceEntityService(CostInvoiceEntityRepository costInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository) {
         this.costInvoiceEntityRepository = costInvoiceEntityRepository;
         this.userUtils = userUtils;
         this.companyEntityRepository = companyEntityRepository;
+        this.contractorEntityRepository = contractorEntityRepository;
     }
 
 
@@ -43,7 +40,7 @@ public class CostInvoiceEntityService {
         costInvoiceEntity.setInvoiceType(invoiceForm.getInvoiceType());
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         costInvoiceEntity.setCompanyId(companyByUserId);
-
+        costInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(invoiceForm.getContractorId()));
         return costInvoiceEntity;
     }
 
