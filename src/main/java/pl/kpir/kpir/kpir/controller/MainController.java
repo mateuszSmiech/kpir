@@ -20,6 +20,5 @@ public class MainController {
     public String loadLogInForm() {
         return "loginForm";
     }
-
 }
 

@@ -8,6 +8,7 @@ import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,7 +17,6 @@ public class ContractorEntityService {
     private final ContractorEntityRepository contractorEntityRepository;
     private final CompanyEntityRepository companyEntityRepository;
     private final UserUtils userUtils;
-
     public ContractorEntityService(ContractorEntityRepository contractorEntityRepository, CompanyEntityRepository companyEntityRepository, UserUtils userUtils) {
         this.contractorEntityRepository = contractorEntityRepository;
         this.companyEntityRepository = companyEntityRepository;
@@ -93,7 +93,19 @@ public class ContractorEntityService {
         contractorEntityRepository.save(contractorEntity);
     }
 
-    private void validateEntry(Long id) {
+    public boolean validateEntry(Long id) {
+        Long loggedInUserId = userUtils.getLoggedInUserId();
+
+        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(loggedInUserId)
+                .stream()
+                .map(CompanyEntity::getId)
+                .findFirst();
+
+        return contractorEntityRepository.findById(id)
+                .map(ContractorEntity::getCompanyId)
+                .map(CompanyEntity::getId)
+                .filter(companyId -> loggedCompanyId.get().equals(companyId))
+                .isPresent();
     }
 }
 
