@@ -1,4 +1,4 @@
-package pl.kpir.kpir.kpir.model;
+package pl.kpir.kpir.kpir.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,14 @@ import lombok.Setter;
 @Setter
 public class EditContractorForm {
 
-    private String shortContractorName;
-    private String fullContractorName;
+    private String shortCompanyName;
+    private String fullCompanyName;
     private String nip;
     private String regon;
-    private Address address;
+    private String street;
+    private String postCode;
+    private String city;
+    private String country;
     private String telephoneNumber;
     private String email;
 }

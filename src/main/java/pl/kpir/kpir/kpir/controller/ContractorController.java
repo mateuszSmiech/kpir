@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
+import pl.kpir.kpir.kpir.forms.EditContractorForm;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
@@ -36,12 +36,10 @@ public class ContractorController {
         return "addContractor";
     }
 
-    //"add?returnTo=${returnTo}
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm, Model model,
+    public String addContractor(@ModelAttribute CreateContractorForm createContractorForm,
         @RequestParam(name = "returnTo", required = false) String returnTo) {
         contractorEntityService.saveContractor(createContractorForm);
-        model.toString();
         if (returnTo != null) {
             return "redirect:" + returnTo;
         }
@@ -71,8 +69,15 @@ public class ContractorController {
     }
 
     @GetMapping(path="/{id}/editContractor")
-    public String editContractor(@PathVariable Long id, Model model) {
-        return "editContractorForm";
+    public String editContractorForm(@PathVariable Long id, Model model) {
+        EditContractorForm editContractorForm = new EditContractorForm();
+        model.addAttribute("editContractor", editContractorForm);
+        return "editContractor";
+    }
+    @PostMapping(path = "/edit")
+    public String editContractor(@ModelAttribute EditContractorForm editContractorForm) {
+        contractorEntityService.editContractor(editContractorForm);
+        return "redirect:/contractorList";
     }
 }
 
