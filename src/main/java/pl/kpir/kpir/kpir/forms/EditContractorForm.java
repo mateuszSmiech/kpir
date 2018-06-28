@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class EditContractorForm {
 
+    private Long id;
     private String shortCompanyName;
     private String fullCompanyName;
     private String nip;

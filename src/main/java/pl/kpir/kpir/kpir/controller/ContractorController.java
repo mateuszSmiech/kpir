@@ -71,13 +71,15 @@ public class ContractorController {
     @GetMapping(path="/{id}/editContractor")
     public String editContractorForm(@PathVariable Long id, Model model) {
         EditContractorForm editContractorForm = new EditContractorForm();
+        ContractorDTO contractor = contractorEntityService.findById(id);
+        model.addAttribute("currentContractor", contractor);
         model.addAttribute("editContractor", editContractorForm);
         return "editContractor";
     }
     @PostMapping(path = "/edit")
     public String editContractor(@ModelAttribute EditContractorForm editContractorForm) {
         contractorEntityService.editContractor(editContractorForm);
-        return "redirect:/contractorList";
+        return "redirect:/contractor/contractorList";
     }
 }
 

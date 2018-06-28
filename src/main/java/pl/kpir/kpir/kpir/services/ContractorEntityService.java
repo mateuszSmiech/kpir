@@ -80,6 +80,7 @@ public class ContractorEntityService {
         address.setCity(editContractorForm.getCity());
         address.setCountry(editContractorForm.getCountry());
         ContractorEntity contractorEntity = new ContractorEntity();
+        contractorEntity.setId(editContractorForm.getId());
         contractorEntity.setShortContractorName(editContractorForm.getShortCompanyName());
         contractorEntity.setFullContractorName(editContractorForm.getFullCompanyName());
         contractorEntity.setNip(editContractorForm.getNip());
