@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@PropertySource( value = {"application-ext.properties"})
+@PropertySource( value = {"application-ext.properties"}, ignoreResourceNotFound = true)
 public class KpirApplication {
 
 	public static void main(String[] args) {
