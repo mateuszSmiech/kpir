@@ -42,7 +42,7 @@ public class SalesInvoiceController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addInvoice(@ModelAttribute CreateSalesInvoiceForm createSalesInvoiceForm) {
         salesInvoiceEntityService.saveInvoice(createSalesInvoiceForm);
-        return "redirect:/dashboard";
+        return "redirect:salesList";
     }
 
     @GetMapping(path = "/salesList")

@@ -43,7 +43,7 @@ public class CostInvoiceController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addInvoice(@ModelAttribute CreateCostInvoiceForm createCostInvoiceForm) {
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
-        return "redirect:/dashboard";
+        return "redirect:costList";
     }
 
 

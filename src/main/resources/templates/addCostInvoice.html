@@ -20,7 +20,7 @@
         <option th:each="contractor : ${contractorList}" th:value="${contractor.id}"
                 th:text="${contractor.nip}"></option>
     </select><br/>
-    <a th:href="@{/contractor/addContractor}">dodaj kontrahenta</a>
+    <a th:href="@{/contractor/addContractor?returnTo=/costInvoice/addCostInvoice}">dodaj kontrahenta</a>
     <br/>
     Numer faktury:
     <input type="text" th:field="*{invoiceNumber}"/><br/>
