@@ -57,24 +57,33 @@ public class ContractorController {
     }
     @GetMapping(path ="/{id}/delete")
     public String deleteContractor(@PathVariable Long id) {
-        contractorEntityService.deleteById(id);
-        return "redirect:/contractor/contractorList";
+        if(contractorEntityService.validateEntry(id)) {
+            contractorEntityService.deleteById(id);
+            return "redirect:/contractor/contractorList";
+        }
+        return "redirect:/error/403";
     }
 
     @GetMapping(path = "/{id}/contractorDetails")
     public String contractorDetails(@PathVariable Long id, Model model) {
-        ContractorDTO contractor = contractorEntityService.findById(id);
-        model.addAttribute("contractor", contractor);
-        return "contractorDetails";
+        if(contractorEntityService.validateEntry(id)) {
+            ContractorDTO contractor = contractorEntityService.findById(id);
+            model.addAttribute("contractor", contractor);
+            return "contractorDetails";
+        }
+        return "redirect:/error/403";
     }
 
     @GetMapping(path="/{id}/editContractor")
     public String editContractorForm(@PathVariable Long id, Model model) {
+        if(contractorEntityService.validateEntry(id)){
         EditContractorForm editContractorForm = new EditContractorForm();
         ContractorDTO contractor = contractorEntityService.findById(id);
         model.addAttribute("currentContractor", contractor);
         model.addAttribute("editContractor", editContractorForm);
         return "editContractor";
+        }
+        return "redirect:/error/403";
     }
     @PostMapping(path = "/edit")
     public String editContractor(@ModelAttribute EditContractorForm editContractorForm) {
