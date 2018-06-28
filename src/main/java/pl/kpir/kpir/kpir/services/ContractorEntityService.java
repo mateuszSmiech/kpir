@@ -1,17 +1,13 @@
 package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
-import pl.kpir.kpir.kpir.exception.ContractorNotFoundException;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
-import pl.kpir.kpir.kpir.model.Address;
-import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.ContractorDTO;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
+import pl.kpir.kpir.kpir.forms.EditContractorForm;
+import pl.kpir.kpir.kpir.model.*;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,6 +71,26 @@ public class ContractorEntityService {
 
     public ContractorDTO findById(Long id) {
         return convertToContractorDTO(contractorEntityRepository.findById(id).orElse(null));
+    }
+    
+    public void editContractor(EditContractorForm editContractorForm) {
+        Address address = new Address();
+        address.setStreet(editContractorForm.getStreet());
+        address.setPostCode(editContractorForm.getPostCode());
+        address.setCity(editContractorForm.getCity());
+        address.setCountry(editContractorForm.getCountry());
+        ContractorEntity contractorEntity = new ContractorEntity();
+        contractorEntity.setShortContractorName(editContractorForm.getShortCompanyName());
+        contractorEntity.setFullContractorName(editContractorForm.getFullCompanyName());
+        contractorEntity.setNip(editContractorForm.getNip());
+        contractorEntity.setRegon(editContractorForm.getRegon());
+        contractorEntity.setAddress(address);
+        contractorEntity.setTelephoneNumber(editContractorForm.getTelephoneNumber());
+        contractorEntity.setEmail(editContractorForm.getEmail());
+        CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
+        contractorEntity.setCompanyId(companyByUserId);
+
+        contractorEntityRepository.save(contractorEntity);
     }
 
     private void validateEntry(Long id) {

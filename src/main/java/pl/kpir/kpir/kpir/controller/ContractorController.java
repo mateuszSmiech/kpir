@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
+import pl.kpir.kpir.kpir.forms.EditContractorForm;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
@@ -69,8 +69,14 @@ public class ContractorController {
     }
 
     @GetMapping(path="/{id}/editContractor")
-    public String editContractor(@PathVariable Long id, Model model) {
-        return "editContractorForm";
+    public String editContractorForm(@PathVariable Long id, Model model) {
+        EditContractorForm editContractorForm = new EditContractorForm();
+        model.addAttribute("editContractor", editContractorForm);
+        return "editContractor";
+    }
+    @PostMapping(path = "/edit")
+    public String editContractor(@ModelAttribute EditContractorForm editContractorForm) {
+        return "redirect:/contractorList";
     }
 }
 
