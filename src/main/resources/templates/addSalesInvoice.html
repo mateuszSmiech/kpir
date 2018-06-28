@@ -20,14 +20,11 @@
     <div class="container-fluid">
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Dodaj Kontrachenta</div>
+                <i class="fa fa-table"></i> Dodaj nową fakturę</div>
             <div class="card-body">
 
                 <h1> Formularz dodawania faktury sprzedażowej</h1>
                 <form th:action="@{add}" th:object="${addSalesInvoice}" method="post">
-
-
-
 
                     Wybierz kontrahenta:
                     <select th:field="*{contractorId}">
@@ -54,10 +51,6 @@
                     Wartość faktury:
                     <input type="text" th:field="*{invoiceAmount}"/><br/>
 
-
-
-
-
                     <button type="submit">Zapisz</button>
                 </form>
             </div>
@@ -71,77 +64,8 @@
 <script th:src="@{/js/jquery.dataTables.js}"></script>
 <script th:src="@{/js/dataTables.bootstrap4.js}"></script>
 <script th:src="@{/js/sb-admin-datatables.min.js}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" th:src="@{/js/scripts.js}"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>Dadawanie faktury sprzedażowej</title>-->
-
-    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
-    <!--<link th:href="@{/css/style.css}" rel="stylesheet"/>-->
-
-<!--</head>-->
-<!--<body>-->
-
-<!--<center><b><h1> Dodawanie faktury sprzedażowej</h1></b></center>-->
-
-<!--<center>-->
-    <!--<form th:action="@{add}" th:object="${addSalesInvoice}" method="post">-->
-
-
-        <!--Wybierz kontrahenta:-->
-        <!--<select th:field="*{contractorId}">-->
-            <!--<option th:each="contractor : ${contractorList}" th:value="${contractor.id}"-->
-                    <!--th:text="${contractor.nip}"></option>-->
-        <!--</select><br/>-->
-        <!--<a th:href="@{/contractor/addContractor?returnTo=/salesInvoice/addSalesInvoice}">dodaj kontrahenta</a>-->
-        <!--<br/>-->
-        <!--Numer faktury:-->
-        <!--<input type="text" th:field="*{invoiceNumber}"/><br/>-->
-        <!--Data transakcji:-->
-        <!--<input type="text" id="exampleConfirmPassword" th:field="*{date}"/><br/>-->
-        <!--Wartość netto:-->
-        <!--<input type="text" th:field="*{netValue}"/><br/>-->
-        <!--Stawka VAT:-->
-        <!--<select th:field="*{vatValue}">-->
-            <!--<option value="23">23%</option>-->
-            <!--<option value="8">8%</option>-->
-            <!--<option value="5">5%</option>-->
-            <!--<option value="0"> zw</option>-->
-        <!--</select><br/>-->
-        <!--Wartość vat:-->
-        <!--<input type="text" th:field="*{vatAmount}"/><br/>-->
-        <!--Wartość faktury:-->
-        <!--<input type="text" th:field="*{invoiceAmount}"/><br/>-->
-        <!---->
-        <!---->
-        <!---->
-        <!--<button type="submit">Zatwierdź</button>-->
-    <!--</form>-->
-<!--</center>-->
-
-<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-<!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
-<!--<script type="text/javascript" th:src="@{/js/scripts.js}"></script>-->
-
-<!--</body>-->
