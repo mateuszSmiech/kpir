@@ -14,6 +14,14 @@
 
 <center>
 <form th:action="@{add}" th:object="${addCostInvoice}" method="post">
+
+    Wybierz kontrahenta:
+    <select th:field="*{contractorId}">
+        <option th:each="contractor : ${contractorList}" th:value="${contractor.id}"
+                th:text="${contractor.nip}"></option>
+    </select><br/>
+    <a th:href="@{/contractor/addContractor}">dodaj kontrahenta</a>
+    <br/>
     Numer faktury:
     <input type="text" th:field="*{invoiceNumber}"/><br/>
     Data transakcji:
