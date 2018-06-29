@@ -14,7 +14,7 @@
         //<![CDATA[
         window.onload = init;
         function init() {
-            document.dates.months.options[new Date().getMonth()].selected = true;
+            document.dates.month.options[new Date().getMonth()].selected = true;
         }
 
         //]]>
@@ -35,7 +35,7 @@
                     <a class="btn btn-primary" th:href="@{/salesInvoice/addSalesInvoice}" style="margin-bottom:20px; ">Dodaj fakturę zakupową</a>
                 </div>
                 <form name="dates">
-                    <select name="months">
+                    <select name="month">
                         <option th:value="1">Styczeń</option>
                         <option th:value="2">Luty</option>
                         <option th:value="3">Marzec</option>
@@ -49,7 +49,7 @@
                         <option th:value="11">Listopad</option>
                         <option th:value="12">Grudzień</option>
                     </select>
-                    <select>
+                    <select name="year">
                         <option th:each="year : ${#numbers.sequence(#dates.year(#dates.createNow()), 1980)}"
                                 th:value="${year}" th:text="${year}">
                         </option>
@@ -67,11 +67,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>qweqwe</td>
-                                <td>qweqwe</td>
-                                <td>qweqwe</td>
-                                <td>qweqwe</td>
+                            <tr th:each="costInvoice : ${costInvoices}">
+                                <td th:text="${costInvoice.getDate()}">qweqwe</td>
+                                <td th:text="${costInvoice.getNetValue()}">qweqwe</td>
+                                <td th:text="${costInvoice.getInvoiceNumber()}">qweqwe</td>
+                                <td th:text="${costInvoice.getInvoiceType()}">qweqwe</td>
                             </tr>
                             </tbody>
                         </table>

@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Książka">
-                <a class="nav-link" href="/book/">
+                <a class="nav-link" th:href="${'/book/?month='+ #dates.month(#dates.createNow())+ '&year='+ #dates.year(#dates.createNow())}">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Książka</span>
                 </a>
