@@ -28,7 +28,7 @@ public class BookController {
     public String loadBookList(Model model,
                                @RequestParam(name = "month", required = false) String month,
                                @RequestParam(name = "year", required = false) String year) {
-//        month = "06";
+//        month = "6";
 //        year = "2018";
         List<CostInvoiceEntity> costInvoiceByDate = bookService.findCostInvoiceByDate(month, year);
         model.addAttribute("costInvoices", costInvoiceByDate);
