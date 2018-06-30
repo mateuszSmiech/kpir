@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.kpir.kpir.kpir.forms.BookListForm;
 import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
+import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
 import pl.kpir.kpir.kpir.services.BookService;
 
 import java.util.List;
@@ -31,6 +32,8 @@ public class BookController {
 //        year = "2018";
         List<CostInvoiceEntity> costInvoiceByDate = bookService.findCostInvoiceByDate(month, year);
         model.addAttribute("costInvoices", costInvoiceByDate);
+        List<SalesInvoiceEntity> salesInvoiceByDate = bookService.findSalesInvoiceByDate(month, year);
+        model.addAttribute("salesInvoices", salesInvoiceByDate);
 
         return "book";
     }

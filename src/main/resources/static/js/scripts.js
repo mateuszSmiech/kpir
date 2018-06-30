@@ -2,7 +2,7 @@
 $( function() {
 
     $( "#exampleConfirmPassword" ).datepicker({
-        dateFormat: "yy-mm-dd"
+        dateFormat: "yy-m-dd"
     });
 });
 

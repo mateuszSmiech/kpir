@@ -56,24 +56,143 @@
                     </select>
                     <button class="btn btn-primary" type="submit">Pokaż</button>
                 </form>
+                    <br/>
                     <div class="table-responsive">
-                        <table class="table table-bordered smaller" width="100%" cellspacing="0">
+                        <!--<table class="table table-bordered smaller" width="100%" cellspacing="0">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                            <!--<th>qwerqwe</th>-->
+                                <!--<th>qwerqwe</th>-->
+                                <!--<th>qwerqwe</th>-->
+                                <!--<th>qwerqwe</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr th:each="costInvoice : ${costInvoices}">-->
+                                <!--<td th:text="${costInvoice.getDate()}">qweqwe</td>-->
+                                <!--<td th:text="${costInvoice.getNetValue()}">qweqwe</td>-->
+                                <!--<td th:text="${costInvoice.getInvoiceNumber()}">qweqwe</td>-->
+                                <!--<td th:text="${costInvoice.getInvoiceType()}">qweqwe</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <table class="table table-bordered smaller" width="100%" cellspacing="0" style="text-align: center;">
+
                             <thead>
+                            <tr style="font-weight: bold;">
+                                <td>L.p.</td>
+                                <td>Nr. dowodu, data</td>
+                                <td>Kontrachent</td>
+                                <td>Wartość sprzedaży towarów i usług</td>
+                                <td>Pozostałe przychody</td>
+                                <td>Razem przychodów</td>
+                                <td>Zakup tow. i materiałów</td>
+                                <td>Koszt ub. zakupów</td>
+                                <td>Wynagrodzenie w got.</td>
+                                <td>Pozostałe wydatki</td>
+                                <td>Razem wydatki</td>
+                                <td>Inne</td>
+                                <td>Uwagi</td>
+                            </tr>
                             <tr>
-                            <th>qwerqwe</th>
-                                <th>qwerqwe</th>
-                                <th>qwerqwe</th>
-                                <th>qwerqwe</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td colspan="3"> Przychody</td>
+                                <td colspan="6">Wydatki</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>-7-</td>
+                                <td>-8-</td>
+                                <td>-9-</td>
+                                <td>-10-</td>
+                                <td>-11-</td>
+                                <td>-12-</td>
+                                <td>-13-</td>
+                                <td>-14-</td>
+                                <td>-15-</td>
+                                <td>-16-</td>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="costInvoice : ${costInvoices}">
-                                <td th:text="${costInvoice.getDate()}">qweqwe</td>
-                                <td th:text="${costInvoice.getNetValue()}">qweqwe</td>
-                                <td th:text="${costInvoice.getInvoiceNumber()}">qweqwe</td>
-                                <td th:text="${costInvoice.getInvoiceType()}">qweqwe</td>
+                                <td>1.</td>
+                                <td th:text="${costInvoice.getInvoiceNumber()}">-</td>
+                                <td>Kontrachent</td>
+                                <td th:text="${costInvoice.getNetValue()}">--</td>
+                                <td>--</td>
+                                <td th:text="${costInvoice.getNetValue()}">--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr th:each="salesInvoice : ${salesInvoices}">
+                                <td>1.</td>
+                                <td th:text="${salesInvoice.getInvoiceNumber()}">-</td>
+                                <td>Kontrachent</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td th:text="${salesInvoice.getNetValue()}">--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
                             </tr>
                             </tbody>
+                            <tfoot style="font-weight: bold;">
+                            <tr>
+                                <td colspan="3">Suma miesiąca:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Przeniesienie z poprzedniego miesiąca:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Razem od początku roku:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
+                            </tr>
+
+
+                            </tfoot>
                         </table>
             </div>
             </div>
