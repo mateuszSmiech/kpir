@@ -33,6 +33,7 @@
                 <div style="display: inline-block">
                 <div>
                     <a class="btn btn-primary" th:href="@{/salesInvoice/addSalesInvoice}" style="margin-bottom:20px; ">Dodaj fakturę zakupową</a>
+                    <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px; ">Dodaj fakturę sprzedażową</a>
                 </div>
                 <form name="dates">
                     <select name="month">
@@ -64,7 +65,7 @@
                             <tr style="font-weight: bold;">
                                 <td>L.p.</td>
                                 <td>Nr. dowodu, data</td>
-                                <td>Kontrachent</td>
+                                <td>Kontrachentasdasda</td>
                                 <td>Wartość sprzedaży towarów i usług</td>
                                 <td>Pozostałe przychody</td>
                                 <td>Razem przychodów</td>
@@ -103,7 +104,7 @@
                             <div th:if="${costInvoices.size()!=0 || salesInvoices.size()!=0}">
                             <tbody>
                             <tr th:each="costInvoice : ${costInvoices}">
-                                <td>1.</td>
+                                <td>1</td>
                                 <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
                                 <td>Kontrachent</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
@@ -118,7 +119,7 @@
                                 <td>--</td>
                             </tr>
                             <tr th:each="salesInvoice : ${salesInvoices}">
-                                <td>1.</td>
+                                <td></td>
                                 <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
                                 <td>Kontrachent</td>
                                 <td>--</td>
