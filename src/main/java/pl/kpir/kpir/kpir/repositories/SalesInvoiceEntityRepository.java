@@ -13,7 +13,7 @@ public interface SalesInvoiceEntityRepository extends JpaRepository<SalesInvoice
     @Query("SELECT sales FROM SalesInvoiceEntity sales INNER JOIN sales.companyId com INNER JOIN com.userEntity u WHERE u.id=:userId")
     List<SalesInvoiceEntity> findByCompanyId(@Param("userId") Long id );
 
-    @Query("SELECT sales FROM SalesInvoiceEntity sales WHERE sales.date LIKE CONCAT(:year, '-', :month, '%')")
+    @Query("SELECT sales FROM SalesInvoiceEntity sales INNER JOIN sales.contractorEntity contr WHERE sales.date LIKE CONCAT(:year, '-', :month, '%')")
     List<SalesInvoiceEntity> findInvoiceByDate(@Param("month") String month, @Param("year") String year);
 
 }

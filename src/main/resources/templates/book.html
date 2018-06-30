@@ -65,7 +65,7 @@
                             <tr style="font-weight: bold;">
                                 <td>L.p.</td>
                                 <td>Nr. dowodu, data</td>
-                                <td>Kontrachentasdasda</td>
+                                <td>Kontrachent</td>
                                 <td>Wartość sprzedaży towarów i usług</td>
                                 <td>Pozostałe przychody</td>
                                 <td>Razem przychodów</td>
@@ -106,7 +106,7 @@
                             <tr th:each="costInvoice : ${costInvoices}">
                                 <td>1</td>
                                 <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
-                                <td>Kontrachent</td>
+                                <td th:text="${costInvoice.getContractorEntity().getShortContractorName() + ', ' + costInvoice.getContractorEntity().getNip()}">Kontrachent</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
@@ -121,7 +121,7 @@
                             <tr th:each="salesInvoice : ${salesInvoices}">
                                 <td></td>
                                 <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
-                                <td>Kontrachent</td>
+                                <td th:text="${salesInvoice.getContractorEntity().getShortContractorName() + ', ' + salesInvoice.getContractorEntity().getNip()}">Kontrachent</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>

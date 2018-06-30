@@ -15,7 +15,7 @@ public interface CostInvoiceEntityRepository extends JpaRepository<CostInvoiceEn
     @Query("SELECT cost FROM CostInvoiceEntity cost INNER JOIN cost.companyId com INNER JOIN com.userEntity u WHERE u.id=:userId")
     List<CostInvoiceEntity> findByCompanyId(@Param("userId") Long id );
 
-    @Query("SELECT cost FROM CostInvoiceEntity cost WHERE cost.date LIKE CONCAT(:year, '-', :month, '%')")
+    @Query("SELECT cost FROM CostInvoiceEntity cost INNER JOIN cost.contractorEntity contr WHERE cost.date LIKE CONCAT(:year, '-', :month, '%')")
     List<CostInvoiceEntity> findInvoiceByDate(@Param("month") String month, @Param("year") String year);
 
 
