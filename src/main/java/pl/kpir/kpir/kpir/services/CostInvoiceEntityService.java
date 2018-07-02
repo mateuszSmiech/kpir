@@ -57,6 +57,8 @@ public class CostInvoiceEntityService {
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
                 .date(costInvoiceEntity.getDate())
                 .netValue(costInvoiceEntity.getNetValue())
+                .vatAmount(costInvoiceEntity.getVatAmount())
+                .invoiceAmount(costInvoiceEntity.getInvoiceAmount())
                 .build();
     }
 
