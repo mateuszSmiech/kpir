@@ -39,6 +39,7 @@ public class CostInvoiceEntityService {
     private CostInvoiceEntity convertToCostInvoiceEntity(CreateCostInvoiceForm invoiceForm) {
         CostInvoiceEntity costInvoiceEntity = new CostInvoiceEntity();
         costInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
+        costInvoiceEntity.setDesc(invoiceForm.getDesc());
         costInvoiceEntity.setDate(invoiceForm.getDate());
         costInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         costInvoiceEntity.setVatValue(invoiceForm.getVatValue());
@@ -55,6 +56,7 @@ public class CostInvoiceEntityService {
         return CostInvoiceDTO.builder()
                 .id(costInvoiceEntity.getId())
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
+                .desc(costInvoiceEntity.getDesc())
                 .date(costInvoiceEntity.getDate())
                 .netValue(costInvoiceEntity.getNetValue())
                 .vatAmount(costInvoiceEntity.getVatAmount())

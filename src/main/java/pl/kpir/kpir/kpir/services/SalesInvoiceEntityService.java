@@ -40,6 +40,7 @@ public class SalesInvoiceEntityService {
         SalesInvoiceEntity salesInvoiceEntity = new SalesInvoiceEntity();
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         salesInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
+        salesInvoiceEntity.setDesc(invoiceForm.getDesc());
         salesInvoiceEntity.setDate(invoiceForm.getDate());
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
@@ -61,6 +62,7 @@ public class SalesInvoiceEntityService {
         return SalesInvoiceDTO.builder()
                 .id(salesInvoiceEntity.getId())
                 .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
+                .desc(salesInvoiceEntity.getDesc())
                 .date(salesInvoiceEntity.getDate())
                 .netValue(salesInvoiceEntity.getNetValue())
                 .vatValue(salesInvoiceEntity.getVatValue())

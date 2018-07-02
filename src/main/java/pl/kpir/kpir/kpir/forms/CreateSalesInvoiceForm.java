@@ -16,6 +16,7 @@ public class CreateSalesInvoiceForm {
 
 
     private String invoiceNumber;
+    private String desc;
     private String date;
     private BigDecimal netValue;
     private BigDecimal vatValue;

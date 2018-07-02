@@ -28,6 +28,8 @@ public class CostInvoiceEntity {
     private CompanyEntity companyId;
     @Column (name = "number")
     private String invoiceNumber;
+    @Column (name = "description")
+    private String desc;
     @Column (nullable = false)
     private String date;
     @Column (name = "netto_value")

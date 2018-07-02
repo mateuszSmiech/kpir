@@ -29,6 +29,7 @@
                         <thead>
                         <tr>
                             <th>Numer faktury</th>
+                            <th>Opis faktury </th>
                             <th>Data</th>
                             <th>Wartość netto</th>
                             <th>Wartość vat</th>
@@ -43,6 +44,7 @@
                         <tr>
                             <th>Numer faktury</th>
                             <th>Data </th>
+                            <th>Opis faktury </th>
                             <th>Wartość netto</th>
                             <th>Wartość vat</th>
                             <th>Wartość brutto</th>
@@ -54,6 +56,7 @@
                         <tbody>
                         <tr th:each="saleInvoice : ${salesList}">
                             <td th:text="${saleInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${saleInvoice.getDesc()}"></td>
                             <td th:text="${saleInvoice.getDate()}"></td>
                             <td th:text="${saleInvoice.netValue}"></td>
                             <td th:text="${saleInvoice.vatAmount}"></td>
