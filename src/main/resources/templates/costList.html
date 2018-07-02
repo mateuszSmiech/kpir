@@ -29,8 +29,11 @@
                         <thead>
                         <tr>
                             <th>Numer faktury</th>
+                            <th>Opis faktury</th>
                             <th>Data</th>
                             <th>Wartość netto</th>
+                            <th>Wartość vat</th>
+                            <th>Wartość brutto</th>
                             <!--<th>Szczegóły</th>-->
                             <!--<th>Edytuj</th>-->
                             <!--<th>Usuń</th>-->
@@ -40,8 +43,11 @@
                         <tfoot>
                         <tr>
                             <th>Numer faktury</th>
+                            <th>Opis faktury</th>
                             <th>Data </th>
                             <th>Wartość netto</th>
+                            <th>Wartość vat</th>
+                            <th>Wartość brutto</th>
                             <!--<th>Szczegóły</th>-->
                             <!--<th>Edytuj</th>-->
                             <!--<th>Usuń</th>-->
@@ -50,8 +56,11 @@
                         <tbody>
                         <tr th:each="costInvoice : ${costList}">
                             <td th:text="${costInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${costInvoice.getDesc()}"></td>
                             <td th:text="${costInvoice.getDate()}"></td>
                             <td th:text="${costInvoice.netValue}"></td>
+                            <td th:text="${costInvoice.vatAmount}"></td>
+                            <td th:text="${costInvoice.invoiceAmount}"></td>
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>-->

@@ -12,9 +12,12 @@ import java.math.BigDecimal;
 public class CreateCostInvoiceForm {
 
     private String invoiceNumber;
+    private String desc;
     private String date;
-    private String netValue;
-    private String vatValue;
+    private BigDecimal netValue;
+    private BigDecimal vatValue;
+    private BigDecimal vatAmount;
+    private BigDecimal invoiceAmount;
     private String invoiceType;
     private Long contractorId;
     private String routing;

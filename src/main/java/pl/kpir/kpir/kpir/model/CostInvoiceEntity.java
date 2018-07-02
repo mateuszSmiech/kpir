@@ -28,12 +28,18 @@ public class CostInvoiceEntity {
     private CompanyEntity companyId;
     @Column (name = "number")
     private String invoiceNumber;
+    @Column (name = "description")
+    private String desc;
     @Column (nullable = false)
     private String date;
     @Column (name = "netto_value")
-    private String netValue;
+    private BigDecimal netValue;
     @Column (name = "vat_value")
-    private String vatValue;
+    private BigDecimal vatValue;
     @Column (name = "invoice_cost")
     private String invoiceType;
+    @Column (name = "vat_amount")
+    private BigDecimal vatAmount;
+    @Column (name = "invoice_amount")
+    private BigDecimal invoiceAmount;
 }

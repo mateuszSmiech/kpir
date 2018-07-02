@@ -29,8 +29,11 @@
                         <thead>
                         <tr>
                             <th>Numer faktury</th>
+                            <th>Opis faktury </th>
                             <th>Data</th>
                             <th>Wartość netto</th>
+                            <th>Wartość vat</th>
+                            <th>Wartość brutto</th>
                             <!--<th>Szczegóły</th>-->
                             <!--<th>Edytuj</th>-->
                             <!--<th>Usuń</th>-->
@@ -41,7 +44,10 @@
                         <tr>
                             <th>Numer faktury</th>
                             <th>Data </th>
+                            <th>Opis faktury </th>
                             <th>Wartość netto</th>
+                            <th>Wartość vat</th>
+                            <th>Wartość brutto</th>
                             <!--<th>Szczegóły</th>-->
                             <!--<th>Edytuj</th>-->
                             <!--<th>Usuń</th>-->
@@ -50,8 +56,12 @@
                         <tbody>
                         <tr th:each="saleInvoice : ${salesList}">
                             <td th:text="${saleInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${saleInvoice.getDesc()}"></td>
                             <td th:text="${saleInvoice.getDate()}"></td>
                             <td th:text="${saleInvoice.netValue}"></td>
+                            <td th:text="${saleInvoice.vatAmount}"></td>
+                            <td th:text="${saleInvoice.invoiceAmount}"></td>
+
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>-->
                             <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>-->

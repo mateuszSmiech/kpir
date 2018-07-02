@@ -9,6 +9,8 @@ import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,11 +38,13 @@ public class CostInvoiceEntityService {
 
     private CostInvoiceEntity convertToCostInvoiceEntity(CreateCostInvoiceForm invoiceForm) {
         CostInvoiceEntity costInvoiceEntity = new CostInvoiceEntity();
-
         costInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
+        costInvoiceEntity.setDesc(invoiceForm.getDesc());
         costInvoiceEntity.setDate(invoiceForm.getDate());
         costInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         costInvoiceEntity.setVatValue(invoiceForm.getVatValue());
+        costInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
+        costInvoiceEntity.setInvoiceAmount(invoiceForm.getNetValue().add(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2)))));
         costInvoiceEntity.setInvoiceType(invoiceForm.getInvoiceType());
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         costInvoiceEntity.setCompanyId(companyByUserId);
@@ -48,19 +52,19 @@ public class CostInvoiceEntityService {
         return costInvoiceEntity;
     }
 
-
     private CostInvoiceDTO convertToCostInvoicesDTO(CostInvoiceEntity costInvoiceEntity) {
         return CostInvoiceDTO.builder()
                 .id(costInvoiceEntity.getId())
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
+                .desc(costInvoiceEntity.getDesc())
                 .date(costInvoiceEntity.getDate())
                 .netValue(costInvoiceEntity.getNetValue())
+                .vatAmount(costInvoiceEntity.getVatAmount())
+                .invoiceAmount(costInvoiceEntity.getInvoiceAmount())
                 .build();
     }
 
     public List<CostInvoiceDTO> findByCompanyId(Long id) {
-
         return costInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
-
     }
 }
