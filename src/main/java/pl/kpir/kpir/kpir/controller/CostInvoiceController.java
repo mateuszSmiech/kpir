@@ -2,10 +2,7 @@ package pl.kpir.kpir.kpir.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
@@ -54,6 +51,15 @@ public class CostInvoiceController {
         List<CostInvoiceDTO> costInvoiceList = costInvoiceEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("costList", costInvoiceList);
         return "costList";
+    }
+
+    @GetMapping(path ="/{id}/delete")
+    public String deleteCostInvoice(@PathVariable Long id) {
+        if(costInvoiceEntityService.validateEntry(id)) {
+            costInvoiceEntityService.deleteById(id);
+            return "redirect:/costInvoice/costList";
+        }
+        return "redirect:/error/403";
     }
 
 

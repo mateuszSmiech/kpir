@@ -3,6 +3,7 @@ package pl.kpir.kpir.kpir.services;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
+import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
@@ -12,6 +13,7 @@ import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -66,5 +68,24 @@ public class CostInvoiceEntityService {
 
     public List<CostInvoiceDTO> findByCompanyId(Long id) {
         return costInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
+    }
+
+    public boolean validateEntry(Long id) {
+        Long loggedInUserId = userUtils.getLoggedInUserId();
+
+        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(loggedInUserId)
+                .stream()
+                .map(CompanyEntity::getId)
+                .findFirst();
+
+        return costInvoiceEntityRepository.findById(id)
+                .map(CostInvoiceEntity::getCompanyId)
+                .map(CompanyEntity::getId)
+                .filter(costId -> loggedCompanyId.get().equals(costId))
+                .isPresent();
+    }
+
+    public void deleteById(Long id) {
+        costInvoiceEntityRepository.deleteById(id);
     }
 }
