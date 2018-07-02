@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @NoArgsConstructor
@@ -27,11 +28,11 @@ public class SalesInvoiceEntity {
     @Column (nullable = false)
     private String date;
     @Column (name = "netto_amount")
-    private String netValue;
+    private BigDecimal netValue;
     @Column (name = "vat_value")
-    private String vatValue;
+    private BigDecimal vatValue;
     @Column (name = "vat_amount")
-    private String vatAmount;
+    private BigDecimal vatAmount;
     @Column (name = "invoice_amount")
-    private String invoiceAmount;
+    private BigDecimal invoiceAmount;
 }

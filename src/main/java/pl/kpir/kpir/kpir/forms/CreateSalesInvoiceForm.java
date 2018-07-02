@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,10 +17,10 @@ public class CreateSalesInvoiceForm {
 
     private String invoiceNumber;
     private String date;
-    private String netValue;
-    private String vatValue;
-    private String vatAmount;
-    private String invoiceAmount;
+    private BigDecimal netValue;
+    private BigDecimal vatValue;
+    private BigDecimal vatAmount;
+    private BigDecimal invoiceAmount;
     private Long contractorId;
 
 }

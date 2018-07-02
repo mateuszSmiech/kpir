@@ -7,6 +7,8 @@ import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 import pl.kpir.kpir.kpir.repositories.SalesInvoiceEntityRepository;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ public class SalesInvoiceEntityService {
     private final UserUtils userUtils;
     private final CompanyEntityRepository companyEntityRepository;
     private final ContractorEntityRepository contractorEntityRepository;
+
 
     public SalesInvoiceEntityService(SalesInvoiceEntityRepository salesInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository) {
         this.salesInvoiceEntityRepository = salesInvoiceEntityRepository;
@@ -40,16 +43,21 @@ public class SalesInvoiceEntityService {
         salesInvoiceEntity.setDate(invoiceForm.getDate());
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
-        salesInvoiceEntity.setVatAmount(invoiceForm.getVatAmount());
-        salesInvoiceEntity.setInvoiceAmount(invoiceForm.getInvoiceAmount());
+        salesInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
+        salesInvoiceEntity.setInvoiceAmount(invoiceForm.getNetValue().add(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2)))));
         salesInvoiceEntity.setCompanyId(companyByUserId);
         salesInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(invoiceForm.getContractorId()));
 
 
+        //.vatAmount(salesInvoiceEntity.getNetValue().multiply(salesInvoiceEntity.getVatValue()).divide(BigDecimal.valueOf(100)))
+        //                .invoiceAmount(salesInvoiceEntity.getNetValue().add(salesInvoiceEntity.getNetValue().multiply(salesInvoiceEntity.getVatValue()).divide(BigDecimal.valueOf(100))))
+
         return salesInvoiceEntity;
     }
 
+
     private SalesInvoiceDTO convertToSalesInvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
+
         return SalesInvoiceDTO.builder()
                 .id(salesInvoiceEntity.getId())
                 .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
