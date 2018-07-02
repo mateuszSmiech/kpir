@@ -46,8 +46,10 @@ public class CostInvoiceController {
     public String addInvoice(@ModelAttribute CreateCostInvoiceForm createCostInvoiceForm,
                              @RequestParam(name="returnTo", required = false) String returnTo) {
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
-        if(returnTo.equals("routing")) {
-            return "redirect:" + createCostInvoiceForm.getRouting();
+        if (returnTo != null) {
+            if (returnTo.equals("routing")) {
+                return "redirect:" + createCostInvoiceForm.getRouting();
+            }
         }
         return "redirect:costList";
     }

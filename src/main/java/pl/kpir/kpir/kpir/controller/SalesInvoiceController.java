@@ -43,8 +43,10 @@ public class SalesInvoiceController {
     public String addInvoice(@ModelAttribute CreateSalesInvoiceForm createSalesInvoiceForm,
                              @RequestParam(name="returnTo", required = false) String returnTo) {
         salesInvoiceEntityService.saveInvoice(createSalesInvoiceForm);
-        if(returnTo.equals("routing")) {
-            return"redirect:" + createSalesInvoiceForm.getRouting();
+        if(returnTo !=null) {
+            if (returnTo.equals("routing")) {
+                return "redirect:" + createSalesInvoiceForm.getRouting();
+            }
         }
         return "redirect:salesList";
     }
