@@ -24,8 +24,10 @@
             <div class="card-body">
 
                 <h1> Formularz dodawania faktury zakupowej</h1>
-                <form th:action="@{add}" th:object="${addCostInvoice}" method="post">
-
+                <form th:action="@{(${returnTo} ? 'add?returnTo=' + ${returnTo}: 'add')}" th:object="${addCostInvoice}" method="post">
+                    <input type="hidden" th:with="month=${#dates.month(#dates.createNow())}, year=${#dates.year(#dates.createNow())}"
+                           name ="routing"
+                           th:value="${'/book/?month=' + month + '&year=' + year}"/>
 
                     Wybierz kontrahenta:
                     <select th:field="*{contractorId}">

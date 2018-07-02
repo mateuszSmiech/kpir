@@ -17,6 +17,7 @@ public class CreateCostInvoiceForm {
     private String vatValue;
     private String invoiceType;
     private Long contractorId;
+    private String routing;
 
 //    private String shortCompanyName;
 //    private String fullCompanyName;

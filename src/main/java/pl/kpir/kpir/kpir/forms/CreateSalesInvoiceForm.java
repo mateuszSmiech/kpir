@@ -21,5 +21,6 @@ public class CreateSalesInvoiceForm {
     private String vatAmount;
     private String invoiceAmount;
     private Long contractorId;
+    private String routing;
 
 }
