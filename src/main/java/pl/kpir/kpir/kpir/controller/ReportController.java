@@ -6,6 +6,7 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfNumber;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
@@ -39,6 +40,8 @@ public class ReportController {
         eventHandler.setOrientation(new PdfNumber(90));
         rotationEventHandler.setRotation(new PdfNumber(90));
         Document document = new Document(pdfDoc);
+        AreaBreak aB = new AreaBreak();
+        document.add(aB);
 //        Paragraph paragraph = new Paragraph("asdasdadasd");
 //        document.add(paragraph);
 
