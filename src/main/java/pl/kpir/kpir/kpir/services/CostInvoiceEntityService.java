@@ -124,6 +124,11 @@ public class CostInvoiceEntityService {
     }
 
     public List<CostInvoiceDTO> findByCostInvoiceByDate(String month, String year) {
+
         return costInvoiceEntityRepository.findInvoiceByDate(month, year).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
+    }
+
+    public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
+        return costInvoiceEntityRepository.sumCurrentMonth(month, year);
     }
 }

@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
-import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
-import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
 import pl.kpir.kpir.kpir.services.BookService;
 
 import java.util.List;
@@ -33,6 +31,7 @@ public class BookController {
         model.addAttribute("costInvoices", costInvoiceByDate);
         List<SalesInvoiceDTO> salesInvoiceByDate = bookService.findSalesInvoiceByDate(month, year);
         model.addAttribute("salesInvoices", salesInvoiceByDate);
+        model.addAttribute("currentMonthCostInvoiceSum", bookService.sumCurrentMonthCostInvoiceAmount(month,year));
 
         return "book";
     }
