@@ -5,6 +5,7 @@ import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -24,5 +25,9 @@ public class BookService {
 
     public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
         return salesInvoiceEntityService.findSalesInvoiceByDate(month, year);
+    }
+
+    public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
+        return costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(month, year);
     }
 }
