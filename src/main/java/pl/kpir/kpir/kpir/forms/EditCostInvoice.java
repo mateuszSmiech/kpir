@@ -1,16 +1,18 @@
-package pl.kpir.kpir.kpir.model;
+package pl.kpir.kpir.kpir.forms;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-public class CostInvoiceDTO {
+public class EditCostInvoice {
 
     private Long id;
     private String invoiceNumber;
@@ -22,6 +24,5 @@ public class CostInvoiceDTO {
     private BigDecimal invoiceAmount;
     private String invoiceType;
     private Long contractorId;
-
 
 }

@@ -61,6 +61,7 @@
                             <td th:text="${costInvoice.netValue}"></td>
                             <td th:text="${costInvoice.vatAmount}"></td>
                             <td th:text="${costInvoice.invoiceAmount}"></td>
+                            <td><a th:href="@{'/costInvoice/' + ${costInvoice.getId()} + '/editCostInvoice'}"><i class="fa fa-fw fa-edit"></i></a></td>
                             <td><a th:href="@{'/costInvoice/' + ${costInvoice.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>
 
                         </tr>
