@@ -27,6 +27,7 @@
                     Wybierz kontrahenta:
                     <select name="contractorId" th:value="${currentCostInvoice.getContractorId().getId()}">
                         <option th:each="contractor : ${contractorList}" th:value="${contractor.id}"
+                                th:selected="${contractor.id == currentCostInvoice.getContractorId().getId()}"
                                 th:text="${contractor.nip}"></option>
                     </select><br/>
                     <a th:href="@{/contractor/addContractor?returnTo=/costInvoice/editCostInvoice}">dodaj kontrahenta</a>
@@ -36,7 +37,7 @@
                     Opis faktury:
                     <input type="text" name="desc" th:value="${currentCostInvoice.desc}"/><br/>
                     Data transakcji:
-                    <input type="text" id="exampleConfirmPassword" th:field="*{date}"/><br/>
+                    <input type="text" name="date" id="exampleConfirmPassword" th:value="${currentCostInvoice.date}"/><br/>
                     Wartość netto:
                     <input type="number" name="netValue" th:value="${currentCostInvoice.netValue}"/><br/>
                     Stawka VAT:
