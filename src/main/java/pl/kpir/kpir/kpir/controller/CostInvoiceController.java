@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
+import pl.kpir.kpir.kpir.forms.EditCostInvoice;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
@@ -64,6 +65,34 @@ public class CostInvoiceController {
         return "costList";
     }
 
+    @GetMapping(path ="/{id}/delete")
+    public String deleteCostInvoice(@PathVariable Long id) {
+        if(costInvoiceEntityService.validateEntry(id)) {
+            costInvoiceEntityService.deleteById(id);
+            return "redirect:/costInvoice/costList";
+        }
+        return "redirect:/error/403";
+    }
 
+    @GetMapping(path="/{id}/editCostInvoice")
+    public String editCostInvoiceForm(@PathVariable Long id, Model model) {
+        if(costInvoiceEntityService.validateEntry(id)){
+            EditCostInvoice editCostInvoice = new EditCostInvoice();
+            CostInvoiceDTO costInvoice = costInvoiceEntityService.findById(id);
+            model.addAttribute("currentCostInvoice", costInvoice);
+            model.addAttribute("editCostInvoice", editCostInvoice);
+            Long loggedInUserId = userUtils.getLoggedInUserId();
+            List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
+            model.addAttribute("contractorList", contractorList);
+            return "editCostInvoice";
+        }
+        return "redirect:/error/403";
+    }
+
+    @PostMapping(path = "/edit")
+    public String editCostInvoice(@ModelAttribute EditCostInvoice editCostInvoice) {
+        costInvoiceEntityService.editCostInvoice(editCostInvoice);
+        return "redirect:costList";
+    }
 
 }
