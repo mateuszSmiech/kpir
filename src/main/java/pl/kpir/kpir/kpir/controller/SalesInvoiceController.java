@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
+import pl.kpir.kpir.kpir.forms.EditSaleInvoice;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
@@ -58,6 +59,36 @@ public class SalesInvoiceController {
         List<SalesInvoiceDTO> salesInvoiceList = salesInvoiceEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("salesList", salesInvoiceList);
         return "salesList";
+    }
+
+    @GetMapping(path ="/{id}/delete")
+    public String deleteSalesInvoice(@PathVariable Long id) {
+        if(salesInvoiceEntityService.validateEntry(id)) {
+            salesInvoiceEntityService.deleteById(id);
+            return "redirect:/salesInvoice/salesList";
+        }
+        return "redirect:/error/403";
+    }
+
+    @GetMapping(path="/{id}/editSaleInvoice")
+    public String editCostInvoiceForm(@PathVariable Long id, Model model) {
+        if(salesInvoiceEntityService.validateEntry(id)){
+            EditSaleInvoice editSaleInvoice = new EditSaleInvoice();
+            SalesInvoiceDTO salesInvoice = salesInvoiceEntityService.findById(id);
+            model.addAttribute("currentSaleInvoice", salesInvoice);
+            model.addAttribute("editSaleInvoice", editSaleInvoice);
+            Long loggedInUserId = userUtils.getLoggedInUserId();
+            List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
+            model.addAttribute("contractorList", contractorList);
+            return "editSaleInvoice";
+        }
+        return "redirect:/error/403";
+    }
+
+    @PostMapping(path = "/edit")
+    public String editSaleInvoice(@ModelAttribute EditSaleInvoice editSaleInvoice) {
+        salesInvoiceEntityService.editSaleInvoice(editSaleInvoice);
+        return "redirect:salesList";
     }
 
 

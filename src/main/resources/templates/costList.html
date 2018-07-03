@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista kontrachentów</title>
+    <title>Lista faktur zakupowych</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
         <!-- Example DataTables Card-->
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Lista faktur sprzedażowych</div>
+                <i class="fa fa-table"></i> Lista faktur zakupowych</div>
             <div class="card-body">
                 <div>
                     <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px; ">Dodaj fakture zakupową</a>
@@ -43,6 +43,7 @@
                         <tfoot>
                         <tr>
                             <th>Numer faktury</th>
+                            <th>Nazwa firmy</th>
                             <th>Opis faktury</th>
                             <th>Data </th>
                             <th>Wartość netto</th>

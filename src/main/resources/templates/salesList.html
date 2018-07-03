@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista kontrachentów</title>
+    <title>Lista faktur sprzedażowych</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
@@ -52,17 +52,16 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <tr th:each="saleInvoice : ${salesList}">
-                            <td th:text="${saleInvoice.getInvoiceNumber()}"></td>
-                            <td th:text="${saleInvoice.getDesc()}"></td>
-                            <td th:text="${saleInvoice.getDate()}"></td>
-                            <td th:text="${saleInvoice.netValue}"></td>
-                            <td th:text="${saleInvoice.vatAmount}"></td>
-                            <td th:text="${saleInvoice.invoiceAmount}"></td>
+                        <tr th:each="salesInvoice : ${salesList}">
+                            <td th:text="${salesInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${salesInvoice.getDesc()}"></td>
+                            <td th:text="${salesInvoice.getDate()}"></td>
+                            <td th:text="${salesInvoice.netValue}"></td>
+                            <td th:text="${salesInvoice.vatAmount}"></td>
+                            <td th:text="${salesInvoice.invoiceAmount}"></td>
+                            <td><a th:href="@{'/salesInvoice/' + ${salesInvoice.getId()} + '/editSaleInvoice'}"><i class="fa fa-fw fa-edit"></i></a></td>
+                            <td><a th:href="@{'/salesInvoice/' + ${salesInvoice.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>
 
-                            <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/contractorDetails'}"><i class="fa fa-fw fa-info-circle"></i></a></td>-->
-                            <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/editContractor'}"><i class="fa fa-fw fa-edit"></i></a></td>-->
-                            <!--<td><a th:href="@{'/contractor/' + ${contractor.getId()} + '/delete'}"><i class="fa fa-fw fa-trash"></i></a></td>-->
                         </tr>
                         </tbody>
                     </table>
