@@ -23,13 +23,17 @@ public class SalesInvoiceEntityService {
     private final UserUtils userUtils;
     private final CompanyEntityRepository companyEntityRepository;
     private final ContractorEntityRepository contractorEntityRepository;
+    private final ContractorEntityService contractorEntityService;
 
 
-    public SalesInvoiceEntityService(SalesInvoiceEntityRepository salesInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository) {
+    public SalesInvoiceEntityService(SalesInvoiceEntityRepository salesInvoiceEntityRepository, UserUtils userUtils,
+                                     CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository,
+                                     ContractorEntityService contractorEntityService) {
         this.salesInvoiceEntityRepository = salesInvoiceEntityRepository;
         this.userUtils = userUtils;
         this.companyEntityRepository = companyEntityRepository;
         this.contractorEntityRepository = contractorEntityRepository;
+        this.contractorEntityService = contractorEntityService;
     }
 
     public void saveInvoice(CreateSalesInvoiceForm invoiceForm) {
@@ -89,6 +93,7 @@ public class SalesInvoiceEntityService {
                 .vatValue(salesInvoiceEntity.getVatValue())
                 .vatAmount(salesInvoiceEntity.getVatAmount())
                 .invoiceAmount(salesInvoiceEntity.getInvoiceAmount())
+                .contractorId(contractorEntityService.convertToContractorDTO(salesInvoiceEntity.getContractorEntity()))
                 .build();
     }
 
@@ -119,5 +124,9 @@ public class SalesInvoiceEntityService {
         salesInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(editSaleInvoice.getContractorId()));
         salesInvoiceEntityRepository.save(salesInvoiceEntity);
 
+    }
+
+    public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
+        return salesInvoiceEntityRepository.findInvoiceByDate(month, year).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
     }
 }

@@ -25,7 +25,7 @@
                     <input type="hidden" name="id" th:value="${currentCostInvoice.id}"/>
 
                     Wybierz kontrahenta:
-                    <select name="contractorId" th:value="${currentCostInvoice.contractorId}">
+                    <select name="contractorId" th:value="${currentCostInvoice.getContractorId().getId()}">
                         <option th:each="contractor : ${contractorList}" th:value="${contractor.id}"
                                 th:text="${contractor.nip}"></option>
                     </select><br/>

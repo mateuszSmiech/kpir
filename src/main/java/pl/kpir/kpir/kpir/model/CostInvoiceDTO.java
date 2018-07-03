@@ -21,7 +21,7 @@ public class CostInvoiceDTO {
     private BigDecimal vatAmount;
     private BigDecimal invoiceAmount;
     private String invoiceType;
-    private Long contractorId;
+    private ContractorDTO contractorId;
 
 
 }
