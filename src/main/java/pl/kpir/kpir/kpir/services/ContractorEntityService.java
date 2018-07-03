@@ -48,7 +48,7 @@ public class ContractorEntityService {
         return contractorEntity;
     }
 
-    private ContractorDTO convertToContractorDTO(ContractorEntity contractorEntity) {
+    public ContractorDTO convertToContractorDTO(ContractorEntity contractorEntity) {
         return ContractorDTO.builder()
                 .id(contractorEntity.getId())
                 .fullContractorName(contractorEntity.getFullContractorName())

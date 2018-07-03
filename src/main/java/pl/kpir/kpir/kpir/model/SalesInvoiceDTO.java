@@ -20,6 +20,6 @@ public class SalesInvoiceDTO {
     private BigDecimal vatValue;
     private BigDecimal vatAmount;
     private BigDecimal invoiceAmount;
-    private Long contractorId;
+    private ContractorDTO contractorId;
 
 }

@@ -108,8 +108,8 @@
                             <tr th:each="costInvoice : ${costInvoices}">
                                 <td>1</td>
                                 <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
-                                <td th:text="${costInvoice.getContractorEntity().getShortContractorName() + ', '
-                                 + costInvoice.getContractorEntity().getNip()}">Kontrachent</td>
+                                <td th:text="${costInvoice.getContractorId().getShortContractorName() + ', '
+                                 + costInvoice.getContractorId().getNip()}">Kontrachent</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
@@ -124,8 +124,8 @@
                             <tr th:each="salesInvoice : ${salesInvoices}">
                                 <td></td>
                                 <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
-                                <td th:text="${salesInvoice.getContractorEntity().getShortContractorName() + ', '
-                                 + salesInvoice.getContractorEntity().getNip()}">Kontrachent</td>
+                                <td th:text="${salesInvoice.getContractorId().getShortContractorName() + ', '
+                                 + salesInvoice.getContractorId().getNip()}">Kontrachent</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>

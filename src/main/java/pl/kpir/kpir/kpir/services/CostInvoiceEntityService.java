@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCostInvoiceForm;
 import pl.kpir.kpir.kpir.forms.EditCostInvoice;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.CostInvoiceEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
@@ -25,12 +24,16 @@ public class CostInvoiceEntityService {
     private final UserUtils userUtils;
     private final CompanyEntityRepository companyEntityRepository;
     private final ContractorEntityRepository contractorEntityRepository;
+    private final ContractorEntityService contractorEntityService;
 
-    public CostInvoiceEntityService(CostInvoiceEntityRepository costInvoiceEntityRepository, UserUtils userUtils, CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository) {
+    public CostInvoiceEntityService(CostInvoiceEntityRepository costInvoiceEntityRepository, UserUtils userUtils,
+                                    CompanyEntityRepository companyEntityRepository, ContractorEntityRepository contractorEntityRepository,
+                                    ContractorEntityService contractorEntityService) {
         this.costInvoiceEntityRepository = costInvoiceEntityRepository;
         this.userUtils = userUtils;
         this.companyEntityRepository = companyEntityRepository;
         this.contractorEntityRepository = contractorEntityRepository;
+        this.contractorEntityService = contractorEntityService;
     }
 
 
@@ -66,6 +69,7 @@ public class CostInvoiceEntityService {
                 .netValue(costInvoiceEntity.getNetValue())
                 .vatAmount(costInvoiceEntity.getVatAmount())
                 .invoiceAmount(costInvoiceEntity.getInvoiceAmount())
+                .contractorId(contractorEntityService.convertToContractorDTO(costInvoiceEntity.getContractorEntity()))
                 .build();
     }
 
@@ -114,5 +118,9 @@ public class CostInvoiceEntityService {
 
         costInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(editCostInvoice.getContractorId()));
         costInvoiceEntityRepository.save(costInvoiceEntity);
+    }
+
+    public List<CostInvoiceDTO> findByCostInvoiceByDate(String month, String year) {
+        return costInvoiceEntityRepository.findInvoiceByDate(month, year).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
     }
 }
