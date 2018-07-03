@@ -3,12 +3,10 @@ package pl.kpir.kpir.kpir.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 
 @Entity
@@ -31,7 +29,7 @@ public class CostInvoiceEntity {
     @Column (name = "description")
     private String desc;
     @Column (nullable = false)
-    private String date;
+    private Date date;
     @Column (name = "netto_value")
     private BigDecimal netValue;
     @Column (name = "vat_value")

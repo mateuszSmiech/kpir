@@ -12,6 +12,8 @@ import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,7 +48,7 @@ public class CostInvoiceEntityService {
         CostInvoiceEntity costInvoiceEntity = new CostInvoiceEntity();
         costInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
         costInvoiceEntity.setDesc(invoiceForm.getDesc());
-        costInvoiceEntity.setDate(invoiceForm.getDate());
+        costInvoiceEntity.setDate(Date.valueOf(invoiceForm.getDate()));
         costInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         costInvoiceEntity.setVatValue(invoiceForm.getVatValue());
         costInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
@@ -61,11 +63,12 @@ public class CostInvoiceEntityService {
     }
 
     private CostInvoiceDTO convertToCostInvoicesDTO(CostInvoiceEntity costInvoiceEntity) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return CostInvoiceDTO.builder()
                 .id(costInvoiceEntity.getId())
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
                 .desc(costInvoiceEntity.getDesc())
-                .date(costInvoiceEntity.getDate())
+                .date(dateFormat.format(costInvoiceEntity.getDate()))
                 .netValue(costInvoiceEntity.getNetValue())
                 .vatAmount(costInvoiceEntity.getVatAmount())
                 .invoiceAmount(costInvoiceEntity.getInvoiceAmount())
@@ -106,7 +109,7 @@ public class CostInvoiceEntityService {
         costInvoiceEntity.setId(editCostInvoice.getId());
         costInvoiceEntity.setInvoiceNumber(editCostInvoice.getInvoiceNumber());
         costInvoiceEntity.setDesc(editCostInvoice.getDesc());
-        costInvoiceEntity.setDate(editCostInvoice.getDate());
+        costInvoiceEntity.setDate(Date.valueOf(editCostInvoice.getDate()));
         costInvoiceEntity.setNetValue(editCostInvoice.getNetValue());
         costInvoiceEntity.setVatValue(editCostInvoice.getVatValue());
         costInvoiceEntity.setVatAmount(editCostInvoice.getNetValue().multiply(editCostInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));

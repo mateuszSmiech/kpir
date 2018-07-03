@@ -9,6 +9,8 @@ import pl.kpir.kpir.kpir.repositories.SalesInvoiceEntityRepository;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +47,7 @@ public class SalesInvoiceEntityService {
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         salesInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
         salesInvoiceEntity.setDesc(invoiceForm.getDesc());
-        salesInvoiceEntity.setDate(invoiceForm.getDate());
+        salesInvoiceEntity.setDate(Date.valueOf(invoiceForm.getDate()));
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
         salesInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
@@ -62,12 +64,12 @@ public class SalesInvoiceEntityService {
 
 
     private SalesInvoiceDTO convertToSalesInvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return SalesInvoiceDTO.builder()
                 .id(salesInvoiceEntity.getId())
                 .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
                 .desc(salesInvoiceEntity.getDesc())
-                .date(salesInvoiceEntity.getDate())
+                .date(dateFormat.format(salesInvoiceEntity.getDate()))
                 .netValue(salesInvoiceEntity.getNetValue())
                 .vatValue(salesInvoiceEntity.getVatValue())
                 .vatAmount(salesInvoiceEntity.getVatAmount())
