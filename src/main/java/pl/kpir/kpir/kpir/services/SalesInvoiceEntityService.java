@@ -114,7 +114,7 @@ public class SalesInvoiceEntityService {
         salesInvoiceEntity.setId(editSaleInvoice.getId());
         salesInvoiceEntity.setInvoiceNumber(editSaleInvoice.getInvoiceNumber());
         salesInvoiceEntity.setDesc(editSaleInvoice.getDesc());
-        salesInvoiceEntity.setDate(editSaleInvoice.getDate());
+        salesInvoiceEntity.setDate(Date.valueOf(editSaleInvoice.getDate()));
         salesInvoiceEntity.setNetValue(editSaleInvoice.getNetValue());
         salesInvoiceEntity.setVatValue(editSaleInvoice.getVatValue());
         salesInvoiceEntity.setVatAmount(editSaleInvoice.getNetValue().multiply(editSaleInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
