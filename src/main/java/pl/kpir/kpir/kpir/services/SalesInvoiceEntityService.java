@@ -2,6 +2,7 @@ package pl.kpir.kpir.kpir.services;
 
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
+import pl.kpir.kpir.kpir.forms.EditSaleInvoice;
 import pl.kpir.kpir.kpir.model.*;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
@@ -12,6 +13,7 @@ import java.math.MathContext;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -39,6 +41,25 @@ public class SalesInvoiceEntityService {
     public void saveInvoice(CreateSalesInvoiceForm invoiceForm) {
         SalesInvoiceEntity invoice = convertToSalesInvoiceEntity(invoiceForm);
         salesInvoiceEntityRepository.save(invoice);
+    }
+
+    public boolean validateEntry(Long id) {
+        Long loggedInUserId = userUtils.getLoggedInUserId();
+
+        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(loggedInUserId)
+                .stream()
+                .map(CompanyEntity::getId)
+                .findFirst();
+
+        return salesInvoiceEntityRepository.findById(id)
+                .map(SalesInvoiceEntity::getCompanyId)
+                .map(CompanyEntity::getId)
+                .filter(costId -> loggedCompanyId.get().equals(costId))
+                .isPresent();
+    }
+
+    public void deleteById(Long id) {
+        salesInvoiceEntityRepository.deleteById(id);
     }
 
     private SalesInvoiceEntity convertToSalesInvoiceEntity(CreateSalesInvoiceForm invoiceForm) {
@@ -80,6 +101,31 @@ public class SalesInvoiceEntityService {
 
     public List<SalesInvoiceDTO> findByCompanyId(Long id) {
         return salesInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
+    }
+
+    public SalesInvoiceDTO findById(Long id) {
+
+        return convertToSalesInvoicesDTO(salesInvoiceEntityRepository.findById(id).orElse(null));
+    }
+
+    public void editSaleInvoice(EditSaleInvoice editSaleInvoice) {
+
+        SalesInvoiceEntity salesInvoiceEntity = new SalesInvoiceEntity();
+        salesInvoiceEntity.setId(editSaleInvoice.getId());
+        salesInvoiceEntity.setInvoiceNumber(editSaleInvoice.getInvoiceNumber());
+        salesInvoiceEntity.setDesc(editSaleInvoice.getDesc());
+        salesInvoiceEntity.setDate(editSaleInvoice.getDate());
+        salesInvoiceEntity.setNetValue(editSaleInvoice.getNetValue());
+        salesInvoiceEntity.setVatValue(editSaleInvoice.getVatValue());
+        salesInvoiceEntity.setVatAmount(editSaleInvoice.getNetValue().multiply(editSaleInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
+        salesInvoiceEntity.setInvoiceAmount(editSaleInvoice.getNetValue().add(editSaleInvoice.getNetValue().multiply(editSaleInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2)))));
+
+        CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
+        salesInvoiceEntity.setCompanyId(companyByUserId);
+
+        salesInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(editSaleInvoice.getContractorId()));
+        salesInvoiceEntityRepository.save(salesInvoiceEntity);
+
     }
 
     public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
