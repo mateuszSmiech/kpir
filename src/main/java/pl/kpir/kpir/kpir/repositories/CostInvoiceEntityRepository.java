@@ -19,8 +19,12 @@ public interface CostInvoiceEntityRepository extends JpaRepository<CostInvoiceEn
     List<CostInvoiceEntity> findInvoiceByDate(@Param("month") String month, @Param("year") String year);
 
 
-    @Query("SELECT SUM(cost.netValue) FROM CostInvoiceEntity cost INNER JOIN cost.contractorEntity contr WHERE cost.date LIKE CONCAT(:year, '-', :month, '%')")
+    @Query("SELECT coalesce(SUM(cost.netValue), 0) FROM CostInvoiceEntity cost INNER JOIN cost.contractorEntity contr WHERE cost.date LIKE CONCAT(:year, '-', :month, '%')")
     BigDecimal sumCurrentMonth(@Param("month") String month, @Param("year") String year);
+
+    @Query("SELECT coalesce(SUM(cost.netValue), 0) FROM CostInvoiceEntity cost INNER JOIN cost.contractorEntity contr WHERE cost.date >= CONCAT(:year, '-01-01') " +
+            "AND cost.date < concat(:year, '-', :month, '-01')")
+    BigDecimal sumNetValueFromYearStart(@Param("month") String month, @Param("year") String year);
 
 
 }
