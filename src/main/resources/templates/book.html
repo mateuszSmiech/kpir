@@ -10,15 +10,15 @@
     <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
     <link th:href="@{/css/dataTables.bootstrap4.css}" rel="stylesheet">
 
-    <script type="text/javascript">
-        //<![CDATA[
-        window.onload = init;
-        function init() {
-            document.dates.month.options[new Date().getMonth()].selected = true;
-        }
+    <!--<script type="text/javascript">-->
+        <!--//<![CDATA[-->
+        <!--window.onload = init;-->
+        <!--function init() {-->
+            <!--document.dates.month.options[new Date().getMonth()].selected = true;-->
+        <!--}-->
 
-        //]]>
-    </script>
+        <!--//]]>-->
+    <!--</script>-->
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <!-- Navigation-->
@@ -32,8 +32,10 @@
             <div class="card-body">
                 <div style="display: inline-block">
                 <div>
-                    <a class="btn btn-primary" th:href="@{/salesInvoice/addSalesInvoice}" style="margin-bottom:20px; ">Dodaj fakturę zakupową</a>
-                    <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px; ">Dodaj fakturę sprzedażową</a>
+                    <a class="btn btn-primary" th:href="@{/salesInvoice/addSalesInvoice?returnTo=routing}" style="margin-bottom:20px;">
+                        Dodaj fakturę zakupową</a>
+                    <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice?returnTo=routing}" style="margin-bottom:20px;">
+                     Dodaj fakturę sprzedażową</a>
                 </div>
                 <form name="dates">
                     <select name="month">
@@ -106,7 +108,8 @@
                             <tr th:each="costInvoice : ${costInvoices}">
                                 <td>1</td>
                                 <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
-                                <td th:text="${costInvoice.getContractorEntity().getShortContractorName() + ', ' + costInvoice.getContractorEntity().getNip()}">Kontrachent</td>
+                                <td th:text="${costInvoice.getContractorEntity().getShortContractorName() + ', '
+                                 + costInvoice.getContractorEntity().getNip()}">Kontrachent</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td th:text="${costInvoice.getNetValue()}">--</td>
@@ -121,7 +124,8 @@
                             <tr th:each="salesInvoice : ${salesInvoices}">
                                 <td></td>
                                 <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
-                                <td th:text="${salesInvoice.getContractorEntity().getShortContractorName() + ', ' + salesInvoice.getContractorEntity().getNip()}">Kontrachent</td>
+                                <td th:text="${salesInvoice.getContractorEntity().getShortContractorName() + ', '
+                                 + salesInvoice.getContractorEntity().getNip()}">Kontrachent</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
@@ -129,7 +133,7 @@
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
-                                <td>--</td>
+                                <td th:text="${salesInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                             </tr>

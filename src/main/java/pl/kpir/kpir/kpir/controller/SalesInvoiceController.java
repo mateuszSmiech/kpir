@@ -2,10 +2,7 @@ package pl.kpir.kpir.kpir.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateSalesInvoiceForm;
 import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
@@ -30,18 +27,27 @@ public class SalesInvoiceController {
     }
 
     @GetMapping(path = "/addSalesInvoice")
-    public String loadInvoice(Model model) {
+    public String loadInvoice(Model model, @RequestParam(name = "returnTo", required = false) String returnTo) {
         CreateSalesInvoiceForm createSalesInvoiceForm = new CreateSalesInvoiceForm();
         model.addAttribute("addSalesInvoice", createSalesInvoiceForm);
         Long loggedInUserId = userUtils.getLoggedInUserId();
         List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("contractorList", contractorList);
+        if (returnTo != null) {
+            model.addAttribute("returnTo", returnTo);
+        }
         return "addSalesInvoice";
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public String addInvoice(@ModelAttribute CreateSalesInvoiceForm createSalesInvoiceForm) {
+    public String addInvoice(@ModelAttribute CreateSalesInvoiceForm createSalesInvoiceForm,
+                             @RequestParam(name="returnTo", required = false) String returnTo) {
         salesInvoiceEntityService.saveInvoice(createSalesInvoiceForm);
+        if(returnTo !=null) {
+            if (returnTo.equals("routing")) {
+                return "redirect:" + createSalesInvoiceForm.getRouting();
+            }
+        }
         return "redirect:salesList";
     }
 

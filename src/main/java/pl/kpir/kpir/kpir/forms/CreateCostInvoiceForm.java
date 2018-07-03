@@ -20,6 +20,7 @@ public class CreateCostInvoiceForm {
     private BigDecimal invoiceAmount;
     private String invoiceType;
     private Long contractorId;
+    private String routing;
 
 //    private String shortCompanyName;
 //    private String fullCompanyName;

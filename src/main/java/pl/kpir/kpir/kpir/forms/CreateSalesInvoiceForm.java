@@ -23,5 +23,6 @@ public class CreateSalesInvoiceForm {
     private BigDecimal vatAmount;
     private BigDecimal invoiceAmount;
     private Long contractorId;
+    private String routing;
 
 }
