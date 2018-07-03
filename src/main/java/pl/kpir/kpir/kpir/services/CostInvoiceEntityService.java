@@ -131,4 +131,8 @@ public class CostInvoiceEntityService {
     public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
         return costInvoiceEntityRepository.sumCurrentMonth(month, year);
     }
+
+    public BigDecimal sumInvoicesValuesFromYearStart(String month, String year) {
+        return costInvoiceEntityRepository.sumNetValueFromYearStart(month, year);
+    }
 }
