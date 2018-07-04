@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 public class CostInvoiceDTO {
-
+//TODO: Zmienić date na LocalDate.
     private Long id;
     private String invoiceNumber;
     private String desc;

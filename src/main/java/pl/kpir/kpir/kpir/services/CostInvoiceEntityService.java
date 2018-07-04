@@ -12,8 +12,8 @@ import pl.kpir.kpir.kpir.repositories.CostInvoiceEntityRepository;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -48,7 +48,7 @@ public class CostInvoiceEntityService {
         CostInvoiceEntity costInvoiceEntity = new CostInvoiceEntity();
         costInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
         costInvoiceEntity.setDesc(invoiceForm.getDesc());
-        costInvoiceEntity.setDate(Date.valueOf(invoiceForm.getDate()));
+        costInvoiceEntity.setDate(LocalDate.parse(invoiceForm.getDate()));
         costInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         costInvoiceEntity.setVatValue(invoiceForm.getVatValue());
         costInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
@@ -63,7 +63,7 @@ public class CostInvoiceEntityService {
     }
 
     private CostInvoiceDTO convertToCostInvoicesDTO(CostInvoiceEntity costInvoiceEntity) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return CostInvoiceDTO.builder()
                 .id(costInvoiceEntity.getId())
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
@@ -109,7 +109,7 @@ public class CostInvoiceEntityService {
         costInvoiceEntity.setId(editCostInvoice.getId());
         costInvoiceEntity.setInvoiceNumber(editCostInvoice.getInvoiceNumber());
         costInvoiceEntity.setDesc(editCostInvoice.getDesc());
-        costInvoiceEntity.setDate(Date.valueOf(editCostInvoice.getDate()));
+        costInvoiceEntity.setDate(LocalDate.parse(editCostInvoice.getDate()));
         costInvoiceEntity.setNetValue(editCostInvoice.getNetValue());
         costInvoiceEntity.setVatValue(editCostInvoice.getVatValue());
         costInvoiceEntity.setVatAmount(editCostInvoice.getNetValue().multiply(editCostInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
@@ -125,7 +125,8 @@ public class CostInvoiceEntityService {
 
     public List<CostInvoiceDTO> findByCostInvoiceByDate(String month, String year) {
 
-        return costInvoiceEntityRepository.findInvoiceByDate(month, year).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
+        return costInvoiceEntityRepository.findInvoiceByDate(Integer.valueOf(month), Integer.valueOf(year))
+                .stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
     }
 
     public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
