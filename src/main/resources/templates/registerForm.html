@@ -8,59 +8,47 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/sb-admin.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
 
 </head>
-<!--<body>-->
-<!--<h1> Formularz rejestracyjny</h1>-->
-<!--<form th:action="@{add}" th:object="${createUser}" method="post">-->
-    <!--Imię:-->
-    <!--<input type="text" th:field="*{firstName}"/><br/>-->
-    <!--Nazwisko:-->
-    <!--<input type="text" th:field="*{lastName}"/><br/>-->
-    <!--Hasło:-->
-    <!--<input type="password" th:field="*{password}"/><br/>-->
-    <!--Email:-->
-    <!--<input type="email" th:field="*{email}"/><br/>-->
-    <!--Data urodzenia:-->
-    <!--<input type="text" id="datepicker" th:field="*{birthDate}"/><br/>-->
-    <!--<button type="submit">Zarejestruj</button>-->
-<!--</form>-->
-
-
-
-<!--</body>-->
 
 <body class="bg-dark">
 <div class="container">
     <div class="card card-register mx-auto mt-5">
         <div class="card-header">Formularz rejestracyjny</div>
         <div class="card-body">
-            <form th:action="@{add}" th:object="${createUser}" method="post">
+            <form action="#" th:action="@{add}" th:object="${createUserForm}" method="post">
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="exampleInputName">Imię:</label>
                             <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Wprowadź imię" th:field="*{firstName}">
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="hasError">Imię nie może być puste</span>
+
                         </div>
                         <div class="col-md-6">
                             <label for="exampleInputLastName">Nazwisko:</label>
                             <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Wprowadź nazwisko" th:field="*{lastName}">
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="hasError">Imię nie może być puste</span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Adres e-mail</label>
-                    <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
+                    <input class="form-control" id="exampleInputEmail1" type="text" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{email}">
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="hasError">Email nie może być pusty</span>
                 </div>
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col-md-6">
                             <label for="exampleInputPassword1">Hasło</label>
                             <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Hasło" th:field="*{password}">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="hasError">Hasło nie może być puste</span>
                         </div>
                         <div class="col-md-6">
                             <label for="exampleConfirmPassword">Data urodzenia</label>
-                            <input class="form-control" id="exampleConfirmPassword" type="text" placeholder="Data urodzenia" th:field="*{birthDate}">
+                            <input class="form-control" id="exampleConfirmPassword" type="text" placeholder="Data urodzenia" th:field="*{birthDate}" readonly>
+                            <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="hasError">Data urodzin nie może być pusta</span>
                         </div>
                     </div>
                 </div>

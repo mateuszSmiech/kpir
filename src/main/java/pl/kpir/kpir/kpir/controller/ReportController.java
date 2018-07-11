@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.kpir.kpir.kpir.services.ReportService;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
 
 
 @Controller

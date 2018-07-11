@@ -1,12 +1,10 @@
 package pl.kpir.kpir.kpir.services;
 
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateCompanyForm;
 import pl.kpir.kpir.kpir.model.Address;
 import pl.kpir.kpir.kpir.model.CompanyEntity;
-import pl.kpir.kpir.kpir.model.CustomUser;
 import pl.kpir.kpir.kpir.model.UserEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.UserEntityRepository;

@@ -3,7 +3,6 @@ package pl.kpir.kpir.kpir.services;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
-import pl.kpir.kpir.kpir.model.SalesInvoiceEntity;
 
 import java.math.BigDecimal;
 import java.util.List;

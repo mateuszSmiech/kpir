@@ -1,6 +1,5 @@
 package pl.kpir.kpir.kpir.config;
 
-import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

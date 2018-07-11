@@ -3,7 +3,10 @@ package pl.kpir.kpir.kpir.services;
 import org.springframework.stereotype.Service;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
 import pl.kpir.kpir.kpir.forms.EditContractorForm;
-import pl.kpir.kpir.kpir.model.*;
+import pl.kpir.kpir.kpir.model.Address;
+import pl.kpir.kpir.kpir.model.CompanyEntity;
+import pl.kpir.kpir.kpir.model.ContractorDTO;
+import pl.kpir.kpir.kpir.model.ContractorEntity;
 import pl.kpir.kpir.kpir.repositories.CompanyEntityRepository;
 import pl.kpir.kpir.kpir.repositories.ContractorEntityRepository;
 

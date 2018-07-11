@@ -1,16 +1,13 @@
 package pl.kpir.kpir.kpir.services;
 
 import com.itextpdf.io.source.ByteArrayOutputStream;
-import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfNumber;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.AreaBreak;
 import com.itextpdf.layout.element.Paragraph;
 import org.springframework.stereotype.Service;
-import pl.kpir.kpir.kpir.handler.PageOrientationEventHandler;
 
 import java.util.stream.IntStream;
 

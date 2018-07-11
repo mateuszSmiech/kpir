@@ -4,8 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.kpir.kpir.kpir.forms.CreateContractorForm;
-import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.forms.EditContractorForm;
+import pl.kpir.kpir.kpir.model.ContractorDTO;
 import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
