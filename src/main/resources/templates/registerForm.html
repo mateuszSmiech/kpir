@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="exampleConfirmPassword">Data urodzenia</label>
-                            <input class="form-control" id="exampleConfirmPassword" type="text" placeholder="Data urodzenia" th:field="*{birthDate}" readonly>
+                            <input class="form-control" id="exampleConfirmPassword" type="text" placeholder="Data urodzenia" th:field="*{birthDate}">
                             <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="hasError">Data urodzin nie może być pusta</span>
                         </div>
                     </div>
