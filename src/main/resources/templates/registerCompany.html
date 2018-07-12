@@ -55,12 +55,12 @@
                         <div class="col-md-3">
                             <label for="exampleInputName">Skócona nazwa firmy:</label>
                             <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Wprowadź skróconą nazwe firmy" th:field="*{shortCompanyName}">
-                            <!--<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{shortCompanyName}" class="hasError">...</span>-->
+                            <span th:if="${#fields.hasErrors('shortCompanyName')}" th:errors="*{shortCompanyName}" class="hasError">...</span>
                         </div>
                         <div class="col-md-9">
                             <label for="exampleInputLastName">Pełna nazwa firmy:</label>
                             <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Wprowadź pełną nazwe firmy" th:field="*{fullCompanyName}">
-                            <!--<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{fullCompanyName}" class="hasError">Imię nie może być puste</span>-->
+                            <span th:if="${#fields.hasErrors('fullCompanyName')}" th:errors="*{fullCompanyName}" class="hasError">...</span>
                         </div>
                     </div>
                 </div>
@@ -75,12 +75,12 @@
                         <div class="col-md-3">
                             <label for="nip">Nip:</label>
                             <input class="form-control" id="nip" type="text" placeholder="Wprowadź NIP" th:field="*{nip}">
-                            <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="hasError">Hasło nie może być puste</span>-->
+                            <span th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}" class="hasError">...e</span>
                         </div>
                         <div class="col-md-3">
                             <label for="regon">Regon:</label>
                             <input class="form-control" id="regon" type="text" placeholder="Wprowadź REGON" th:field="*{regon}">
-                            <!--<span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="hasError">Data urodzin nie może być pusta</span>-->
+                            <span th:if="${#fields.hasErrors('regon')}" th:errors="*{regon}" class="hasError">...</span>
                         </div>
                     </div>
                     <div class="form-row">
@@ -113,17 +113,17 @@
                         <div class="col-md-4">
                             <label for="street">Ulica:</label>
                             <input class="form-control" id="street" type="text" placeholder="Wprowadź ulicę" th:field="*{street}">
-                            <!--<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="hasError">Hasło nie może być puste</span>-->
+                            <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="hasError">...</span>
                         </div>
                         <div class="col-md-2">
                             <label for="postcode">Kod pocztowy:</label>
                             <input class="form-control" id="postcode" type="text" placeholder="Wprowadź kod pocztowy" th:field="*{postCode}">
-                            <!--<span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="hasError">Data urodzin nie może być pusta</span>-->
+                            <span th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}" class="hasError">...</span>
                         </div>
                         <div class="col-md-3">
                             <label for="city">Miasto:</label>
                             <input class="form-control" id="city" type="text" placeholder="Wprowadź miasto" th:field="*{city}">
-                            <!--<span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="hasError">Data urodzin nie może być pusta</span>-->
+                            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="hasError">Data urodzin nie może być pusta</span>
                         </div>
                         <div class="col-md-3">
                             <label for="country">Kraj:</label>
@@ -135,7 +135,7 @@
                         <div class="col-md-9">
                             <label for="email1">Adres e-mail:</label>
                             <input class="form-control" id="email1" type="text" aria-describedby="emailHelp" placeholder="Wprowadź e-mail" th:field="*{email}">
-                            <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="hasError">Email nie może być pusty</span>-->
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="hasError">Email nie może być pusty</span>
                         </div>
                         <div class="col-md-3">
                             <label for="phone">Numer telefonu:</label>
