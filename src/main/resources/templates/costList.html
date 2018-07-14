@@ -25,12 +25,13 @@
                     <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px; ">Dodaj fakture zakupową</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered smaller" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
+                            <th>Data księgowania</th>
                             <th>Numer faktury</th>
-                            <th>Opis faktury</th>
-                            <th>Data</th>
+                            <th>Nazwa kontrahenta</th>
+                            <th>NIP</th>
                             <th>Wartość netto</th>
                             <th>Wartość vat</th>
                             <th>Wartość brutto</th>
@@ -40,25 +41,12 @@
 
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Numer faktury</th>
-                            <th>Nazwa firmy</th>
-                            <th>Opis faktury</th>
-                            <th>Data </th>
-                            <th>Wartość netto</th>
-                            <th>Wartość vat</th>
-                            <th>Wartość brutto</th>
-                            <th>Edytuj</th>
-                            <th>Usuń</th>
-
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <tr th:each="costInvoice : ${costList}">
-                            <td th:text="${costInvoice.getInvoiceNumber()}"></td>
-                            <td th:text="${costInvoice.getDesc()}"></td>
                             <td th:text="${costInvoice.getDate()}"></td>
+                            <td th:text="${costInvoice.getInvoiceNumber()}"></td>
+                            <td th:text="${costInvoice.getContractorId().getShortContractorName()}"></td>
+                            <td th:text="${costInvoice.getContractorId().getNip()}"></td>
                             <td th:text="${costInvoice.netValue}"></td>
                             <td th:text="${costInvoice.vatAmount}"></td>
                             <td th:text="${costInvoice.invoiceAmount}"></td>
@@ -67,6 +55,20 @@
 
                         </tr>
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Data księgowania</th>
+                            <th>Numer faktury</th>
+                            <th>Nazwa kontrahenta</th>
+                            <th>NIP</th>
+                            <th>Wartość netto</th>
+                            <th>Wartość vat</th>
+                            <th>Wartość brutto</th>
+                            <th>Edytuj</th>
+                            <th>Usuń</th>
+
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

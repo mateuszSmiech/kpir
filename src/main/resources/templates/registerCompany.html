@@ -120,6 +120,8 @@
                             <input class="form-control" id="postcode" type="text" placeholder="Wprowadź kod pocztowy" th:field="*{postCode}">
                             <span th:if="${#fields.hasErrors('postCode')}" th:errors="*{postCode}" class="hasError">...</span>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-md-3">
                             <label for="city">Miasto:</label>
                             <input class="form-control" id="city" type="text" placeholder="Wprowadź miasto" th:field="*{city}">
