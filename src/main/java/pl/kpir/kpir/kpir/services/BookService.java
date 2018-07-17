@@ -18,16 +18,16 @@ public class BookService {
         this.salesInvoiceEntityService = salesInvoiceEntityService;
     }
 
-    public List<CostInvoiceDTO> findCostInvoiceByDate(String month, String year) {
-        return costInvoiceEntityService.findByCostInvoiceByDate(month, year);
+    public List<CostInvoiceDTO> findCostInvoiceByDate(Long id, String month, String year) {
+        return costInvoiceEntityService.findByCostInvoiceByDate(id, month, year);
     }
 
     public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
         return salesInvoiceEntityService.findSalesInvoiceByDate(month, year);
     }
 
-    public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
-        return costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(month, year);
+    public BigDecimal sumCurrentMonthCostInvoiceAmount(Long id, String month, String year) {
+        return costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(id, month, year);
     }
 
     public BigDecimal sumCostInvoiceAmountFromYearStart(String month, String year) {

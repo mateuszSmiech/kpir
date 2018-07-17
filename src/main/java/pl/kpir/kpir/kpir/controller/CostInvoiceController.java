@@ -12,6 +12,9 @@ import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 @Controller
@@ -21,7 +24,7 @@ public class CostInvoiceController {
     private final CostInvoiceEntityService costInvoiceEntityService;
     private final ContractorEntityService contractorEntityService;
     private final UserUtils userUtils;
-    private HttpServletRequest request;
+    private Long companyId;
 
 
     public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService, ContractorEntityService contractorEntityService, UserUtils userUtils) {
@@ -35,6 +38,7 @@ public class CostInvoiceController {
         CreateCostInvoiceForm createCostInvoiceForm = new CreateCostInvoiceForm();
         model.addAttribute("addCostInvoice", createCostInvoiceForm);
         Long loggedInUserId = userUtils.getLoggedInUserId();
+        //TODO zmienić logged user na company
         List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
         model.addAttribute("contractorList", contractorList);
         if (returnTo != null) {
@@ -46,22 +50,28 @@ public class CostInvoiceController {
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addInvoice(@ModelAttribute CreateCostInvoiceForm createCostInvoiceForm,
                              @RequestParam(name="returnTo", required = false) String returnTo) {
+        LocalDate date = LocalDate.now();
+        int month = date.getMonth().getValue();
+        int year = date.getYear();
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
         if (returnTo != null) {
             if (returnTo.equals("routing")) {
                 return "redirect:" + createCostInvoiceForm.getRouting();
             }
         }
-        return "redirect:costList";
+        return "redirect:costList?month=" + month + "&year=" + year;
     }
 
 
     @GetMapping(path = "/costList")
-    public String salesList(Model model) {
-        Long loggedInUserId = userUtils.getLoggedInUserId();
-
-        List<CostInvoiceDTO> costInvoiceList = costInvoiceEntityService.findByCompanyId(loggedInUserId);
+    public String salesList(Model model,
+                            @RequestParam(name = "month", required = false) String month,
+                            @RequestParam(name = "year", required = false) String year) {
+        companyId = userUtils.getLoggedInCompany();
+        BigDecimal sumNetValue = costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
+        List<CostInvoiceDTO> costInvoiceList = costInvoiceEntityService.findByCompanyId(companyId, month, year);
         model.addAttribute("costList", costInvoiceList);
+        model.addAttribute("sumNetValue", sumNetValue);
         return "costList";
     }
 

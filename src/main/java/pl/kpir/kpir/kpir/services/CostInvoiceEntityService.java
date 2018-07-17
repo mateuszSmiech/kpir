@@ -76,8 +76,10 @@ public class CostInvoiceEntityService {
                 .build();
     }
 
-    public List<CostInvoiceDTO> findByCompanyId(Long id) {
-        return costInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
+    public List<CostInvoiceDTO> findByCompanyId(Long id, String month, String year) {
+        return costInvoiceEntityRepository.findByCompanyId(id, Integer.valueOf(month), Integer.valueOf(year)).stream()
+                .map(this::convertToCostInvoicesDTO)
+                .collect(Collectors.toList());
     }
 
     public boolean validateEntry(Long id) {
@@ -123,14 +125,14 @@ public class CostInvoiceEntityService {
         costInvoiceEntityRepository.save(costInvoiceEntity);
     }
 
-    public List<CostInvoiceDTO> findByCostInvoiceByDate(String month, String year) {
+    public List<CostInvoiceDTO> findByCostInvoiceByDate(Long id, String month, String year) {
 
-        return costInvoiceEntityRepository.findInvoiceByDate(Integer.valueOf(month), Integer.valueOf(year))
+        return costInvoiceEntityRepository.findInvoiceByDate(id, Integer.valueOf(month), Integer.valueOf(year))
                 .stream().map(this::convertToCostInvoicesDTO).collect(Collectors.toList());
     }
 
-    public BigDecimal sumCurrentMonthCostInvoiceAmount(String month, String year) {
-        return costInvoiceEntityRepository.sumCurrentMonth(month, year);
+    public BigDecimal sumCurrentMonthCostInvoiceAmount(Long id, String month, String year) {
+        return costInvoiceEntityRepository.sumNetValueForCurrentMonth(id, Integer.valueOf(month), Integer.valueOf(year));
     }
 
     public BigDecimal sumInvoicesValuesFromYearStart(String month, String year) {

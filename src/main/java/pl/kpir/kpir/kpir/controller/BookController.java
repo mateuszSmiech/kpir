@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.kpir.kpir.kpir.model.CostInvoiceDTO;
 import pl.kpir.kpir.kpir.model.SalesInvoiceDTO;
 import pl.kpir.kpir.kpir.services.BookService;
+import pl.kpir.kpir.kpir.services.UserUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final UserUtils userUtils;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, UserUtils userUtils) {
         this.bookService = bookService;
+        this.userUtils = userUtils;
     }
 
 
@@ -27,10 +30,11 @@ public class BookController {
     public String loadBookList(Model model,
                                @RequestParam(name = "month", required = false) String month,
                                @RequestParam(name = "year", required = false) String year) {
-        BigDecimal currentMonthSum = bookService.sumCurrentMonthCostInvoiceAmount(month, year);
+        Long companyId = userUtils.getLoggedInCompany();
+        BigDecimal currentMonthSum = bookService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
         BigDecimal previousMonthSum = bookService.sumCostInvoiceAmountFromYearStart(month, year);
 
-        List<CostInvoiceDTO> costInvoiceByDate = bookService.findCostInvoiceByDate(month, year);
+        List<CostInvoiceDTO> costInvoiceByDate = bookService.findCostInvoiceByDate(companyId, month, year);
         model.addAttribute("costInvoices", costInvoiceByDate);
         List<SalesInvoiceDTO> salesInvoiceByDate = bookService.findSalesInvoiceByDate(month, year);
         model.addAttribute("salesInvoices", salesInvoiceByDate);
