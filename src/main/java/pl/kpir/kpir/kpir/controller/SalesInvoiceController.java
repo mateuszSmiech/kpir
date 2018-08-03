@@ -31,9 +31,7 @@ public class SalesInvoiceController {
     public String loadInvoice(Model model, @RequestParam(name = "returnTo", required = false) String returnTo) {
         CreateSalesInvoiceForm createSalesInvoiceForm = new CreateSalesInvoiceForm();
         model.addAttribute("addSalesInvoice", createSalesInvoiceForm);
-        Long loggedInUserId = userUtils.getLoggedInUserId();
-        List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
-        model.addAttribute("contractorList", contractorList);
+        model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInUserId()));
         if (returnTo != null) {
             model.addAttribute("returnTo", returnTo);
         }
@@ -55,9 +53,7 @@ public class SalesInvoiceController {
     @GetMapping(path = "/salesList")
     public String salesList(Model model) {
         Long loggedInUserId = userUtils.getLoggedInUserId();
-
-        List<SalesInvoiceDTO> salesInvoiceList = salesInvoiceEntityService.findByCompanyId(loggedInUserId);
-        model.addAttribute("salesList", salesInvoiceList);
+        model.addAttribute("salesList", salesInvoiceEntityService.findByCompanyId(loggedInUserId));
         return "salesList";
     }
 
@@ -77,9 +73,7 @@ public class SalesInvoiceController {
             SalesInvoiceDTO salesInvoice = salesInvoiceEntityService.findById(id);
             model.addAttribute("currentSaleInvoice", salesInvoice);
             model.addAttribute("editSaleInvoice", editSaleInvoice);
-            Long loggedInUserId = userUtils.getLoggedInUserId();
-            List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
-            model.addAttribute("contractorList", contractorList);
+            model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInUserId()));
             return "editSaleInvoice";
         }
         return "redirect:/error/403";

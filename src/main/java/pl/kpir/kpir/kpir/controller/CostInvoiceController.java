@@ -13,6 +13,8 @@ import pl.kpir.kpir.kpir.services.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
@@ -24,7 +26,6 @@ public class CostInvoiceController {
     private final CostInvoiceEntityService costInvoiceEntityService;
     private final ContractorEntityService contractorEntityService;
     private final UserUtils userUtils;
-    private Long companyId;
 
 
     public CostInvoiceController(CostInvoiceEntityService costInvoiceEntityService, ContractorEntityService contractorEntityService, UserUtils userUtils) {
@@ -64,14 +65,15 @@ public class CostInvoiceController {
 
 
     @GetMapping(path = "/costList")
-    public String salesList(Model model,
+    public String costList(Model model,
                             @RequestParam(name = "month", required = false) String month,
                             @RequestParam(name = "year", required = false) String year) {
-        companyId = userUtils.getLoggedInCompany();
-        BigDecimal sumNetValue = costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
-        List<CostInvoiceDTO> costInvoiceList = costInvoiceEntityService.findByCompanyId(companyId, month, year);
-        model.addAttribute("costList", costInvoiceList);
+        BigDecimal sumNetValue = costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(userUtils.getLoggedInCompany(), month, year);
+        BigDecimal sumGrossValue = sumNetValue.multiply(BigDecimal.valueOf(1.23));
+        model.addAttribute("costList", costInvoiceEntityService.findByCompanyId(userUtils.getLoggedInCompany(), month, year));
         model.addAttribute("sumNetValue", sumNetValue);
+        model.addAttribute("vatValue", sumNetValue.multiply(BigDecimal.valueOf(0.23)).setScale(2, RoundingMode.HALF_UP));
+        model.addAttribute("grossValue", sumGrossValue);
         return "costList";
     }
 
