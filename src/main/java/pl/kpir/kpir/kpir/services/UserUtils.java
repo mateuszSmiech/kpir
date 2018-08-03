@@ -18,12 +18,11 @@ public class UserUtils {
 
     public Long getLoggedInUserId() {
         CustomUser principal = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long id = principal.getUserEntity().getId();
-        return id;
+        return principal.getUserEntity().getId();
+
     }
 
     public Long getLoggedInCompany() {
-        Long id = companyEntityRepository.findByUserId(getLoggedInUserId()).stream().map(CompanyEntity::getId).findFirst().orElse(null);
-        return id;
+        return companyEntityRepository.findByUserId(getLoggedInUserId()).stream().map(CompanyEntity::getId).findFirst().orElse(null);
     }
 }

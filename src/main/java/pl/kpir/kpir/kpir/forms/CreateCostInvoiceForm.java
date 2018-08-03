@@ -21,14 +21,4 @@ public class CreateCostInvoiceForm {
     private String invoiceType;
     private Long contractorId;
     private String routing;
-
-//    private String shortCompanyName;
-//    private String fullCompanyName;
-//    private String nip;
-//    private String street;
-//    private String postCode;
-//    private String city;
-//    private String country;
-//    private String telephoneNumber;
-//    private String email;
 }

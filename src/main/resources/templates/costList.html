@@ -82,7 +82,7 @@
                 <div style="display: inline-block">
                     <div>
                         <a class="btn btn-primary" th:href="@{/costInvoice/addCostInvoice}" style="margin-bottom:20px;">
-                            Dodaj fakturę sprzedażową</a>
+                            Dodaj fakturę zakupową</a>
                     </div>
                     <form name="dates">
                         <select name="month">
@@ -125,6 +125,7 @@
 
                             </tr>
                             </thead>
+                            <div th:if="${costList.size()!=0}">
                             <tbody>
                             <tr th:each="costInvoice : ${costList}">
                                 <td th:text="${costInvoice.getDate()}"></td>
@@ -139,6 +140,7 @@
 
                             </tr>
                             </tbody>
+                            </div>
                             <tfoot>
                             <tr>
                                 <th colspan="4"></th>
