@@ -38,9 +38,7 @@ public class CostInvoiceController {
     public String loadInvoice(Model model, @RequestParam(name = "returnTo", required = false) String returnTo) {
         CreateCostInvoiceForm createCostInvoiceForm = new CreateCostInvoiceForm();
         model.addAttribute("addCostInvoice", createCostInvoiceForm);
-        Long loggedInUserId = userUtils.getLoggedInUserId();
-        //TODO zmienić logged user na company
-        List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(loggedInUserId);
+        List<ContractorDTO> contractorList = contractorEntityService.findByCompanyId(userUtils.getLoggedInUserId());
         model.addAttribute("contractorList", contractorList);
         if (returnTo != null) {
             model.addAttribute("returnTo", returnTo);

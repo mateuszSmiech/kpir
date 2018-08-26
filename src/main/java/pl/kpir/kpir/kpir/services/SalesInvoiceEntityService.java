@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,9 +48,8 @@ public class SalesInvoiceEntityService {
     }
 
     public boolean validateEntry(Long id) {
-        Long loggedInUserId = userUtils.getLoggedInUserId();
 
-        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(loggedInUserId)
+        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId())
                 .stream()
                 .map(CompanyEntity::getId)
                 .findFirst();
@@ -65,12 +66,11 @@ public class SalesInvoiceEntityService {
     }
 
     private SalesInvoiceEntity convertToSalesInvoiceEntity(CreateSalesInvoiceForm invoiceForm) {
-
         SalesInvoiceEntity salesInvoiceEntity = new SalesInvoiceEntity();
         CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
         salesInvoiceEntity.setInvoiceNumber(invoiceForm.getInvoiceNumber());
         salesInvoiceEntity.setDesc(invoiceForm.getDesc());
-        salesInvoiceEntity.setDate(Date.valueOf(invoiceForm.getDate()));
+        salesInvoiceEntity.setDate(LocalDate.parse(invoiceForm.getDate()));
         salesInvoiceEntity.setNetValue(invoiceForm.getNetValue());
         salesInvoiceEntity.setVatValue(invoiceForm.getVatValue());
         salesInvoiceEntity.setVatAmount(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));
@@ -87,12 +87,11 @@ public class SalesInvoiceEntityService {
 
 
     private SalesInvoiceDTO convertToSalesInvoicesDTO(SalesInvoiceEntity salesInvoiceEntity) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         return SalesInvoiceDTO.builder()
                 .id(salesInvoiceEntity.getId())
                 .invoiceNumber(salesInvoiceEntity.getInvoiceNumber())
                 .desc(salesInvoiceEntity.getDesc())
-                .date(dateFormat.format(salesInvoiceEntity.getDate()))
+                .date(salesInvoiceEntity.getDate())
                 .netValue(salesInvoiceEntity.getNetValue())
                 .vatValue(salesInvoiceEntity.getVatValue())
                 .vatAmount(salesInvoiceEntity.getVatAmount())
@@ -116,7 +115,7 @@ public class SalesInvoiceEntityService {
         salesInvoiceEntity.setId(editSaleInvoice.getId());
         salesInvoiceEntity.setInvoiceNumber(editSaleInvoice.getInvoiceNumber());
         salesInvoiceEntity.setDesc(editSaleInvoice.getDesc());
-        salesInvoiceEntity.setDate(Date.valueOf(editSaleInvoice.getDate()));
+        salesInvoiceEntity.setDate(editSaleInvoice.getDate());
         salesInvoiceEntity.setNetValue(editSaleInvoice.getNetValue());
         salesInvoiceEntity.setVatValue(editSaleInvoice.getVatValue());
         salesInvoiceEntity.setVatAmount(editSaleInvoice.getNetValue().multiply(editSaleInvoice.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2))));

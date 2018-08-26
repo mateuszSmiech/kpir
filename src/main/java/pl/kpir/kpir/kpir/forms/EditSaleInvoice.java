@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +18,7 @@ public class EditSaleInvoice {
     private Long id;
     private String invoiceNumber;
     private String desc;
-    private String date;
+    private LocalDate date;
     private BigDecimal netValue;
     private BigDecimal vatValue;
     private BigDecimal vatAmount;

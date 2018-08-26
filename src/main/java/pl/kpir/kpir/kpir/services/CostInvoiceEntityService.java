@@ -55,8 +55,7 @@ public class CostInvoiceEntityService {
         costInvoiceEntity.setInvoiceAmount(invoiceForm.getNetValue().add(invoiceForm.getNetValue().multiply(invoiceForm.getVatValue().divide(BigDecimal.valueOf(100), new MathContext(2)))));
         costInvoiceEntity.setInvoiceType(invoiceForm.getInvoiceType());
 
-        CompanyEntity companyByUserId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0);
-        costInvoiceEntity.setCompanyId(companyByUserId);
+        costInvoiceEntity.setCompanyId(companyEntityRepository.findByUserId(userUtils.getLoggedInUserId()).get(0));
 
         costInvoiceEntity.setContractorEntity(contractorEntityRepository.getOne(invoiceForm.getContractorId()));
         return costInvoiceEntity;
@@ -83,9 +82,8 @@ public class CostInvoiceEntityService {
     }
 
     public boolean validateEntry(Long id) {
-        Long loggedInUserId = userUtils.getLoggedInUserId();
 
-        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(loggedInUserId)
+        Optional<Long> loggedCompanyId = companyEntityRepository.findByUserId(userUtils.getLoggedInUserId())
                 .stream()
                 .map(CompanyEntity::getId)
                 .findFirst();
