@@ -18,11 +18,11 @@
                     <span class="nav-link-text">Panel Główny</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury zakupowe">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury kosztowe">
                 <a class="nav-link"
                    th:href="${'/costInvoice/costList?month='+ #dates.format(#dates.createNow(), 'MM')+ '&year='+ #dates.year(#dates.createNow())}">
                     <i class="fa fa-fw fa-area-chart"></i>
-                    <span class="nav-link-text">Faktury zakupowe</span>
+                    <span class="nav-link-text">Faktury kosztowe</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury sprzedażowe">
