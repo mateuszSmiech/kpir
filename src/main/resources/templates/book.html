@@ -96,14 +96,15 @@
                             </thead>
                             <div th:if="${costInvoices.size()!=0 || salesInvoices.size()!=0}">
                             <tbody>
-                            <tr th:each="costInvoice : ${costInvoices}">
+
+                            <tr th:each="salesInvoice : ${salesInvoices}">
                                 <td>1</td>
-                                <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
-                                <td th:text="${costInvoice.getContractorId().getShortContractorName() + ', '
-                                 + costInvoice.getContractorId().getNip()}">Kontrachent</td>
-                                <td th:text="${costInvoice.getNetValue()}">--</td>
+                                <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
+                                <td th:text="${salesInvoice.getContractorId().getShortContractorName() + ', '
+                                 + salesInvoice.getContractorId().getNip()}">Kontrachent</td>
+                                <td th:text="${salesInvoice.getNetValue()}">--</td>
                                 <td>--</td>
-                                <td th:text="${costInvoice.getNetValue()}">--</td>
+                                <td th:text="${salesInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
@@ -112,19 +113,19 @@
                                 <td>--</td>
                                 <td>--</td>
                             </tr>
-                            <tr th:each="salesInvoice : ${salesInvoices}">
-                                <td></td>
-                                <td th:text="${salesInvoice.getInvoiceNumber() + ', ' + salesInvoice.getDate()}">-</td>
-                                <td th:text="${salesInvoice.getContractorId().getShortContractorName() + ', '
-                                 + salesInvoice.getContractorId().getNip()}">Kontrachent</td>
+                            <tr th:each="costInvoice : ${costInvoices}">
+                                <td>1</td>
+                                <td th:text="${costInvoice.getInvoiceNumber() + ', ' + costInvoice.getDate()}">-</td>
+                                <td th:text="${costInvoice.getContractorId().getShortContractorName() + ', '
+                                 + costInvoice.getContractorId().getNip()}">Kontrachent</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
-                                <td th:text="${salesInvoice.getNetValue()}">--</td>
+                                <td th:text="${costInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
-                                <td th:text="${salesInvoice.getNetValue()}">--</td>
+                                <td th:text="${costInvoice.getNetValue()}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                             </tr>
@@ -133,10 +134,10 @@
                             <tfoot style="font-weight: bold;">
                             <tr>
                                 <td colspan="3">Suma miesiąca:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
                                 <td th:text="${currentMonthCostInvoiceSum}">--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
@@ -146,10 +147,10 @@
                             </tr>
                             <tr>
                                 <td colspan="3">Przeniesienie z poprzedniego miesiąca:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
                                 <td th:text="${totalCostInvoicesSum}">--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
@@ -159,10 +160,10 @@
                             </tr>
                             <tr>
                                 <td colspan="3">Razem od początku roku:</td>
+                                <td>--</td>
+                                <td>--</td>
+                                <td>--</td>
                                 <td th:text="${totalSumForCurrentMonth}">--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>
