@@ -31,16 +31,22 @@ public class BookController {
                                @RequestParam(name = "month", required = false) String month,
                                @RequestParam(name = "year", required = false) String year) {
         Long companyId = userUtils.getLoggedInCompany();
-        BigDecimal currentMonthSum = bookService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
-        BigDecimal previousMonthSum = bookService.sumCostInvoiceAmountFromYearStart(companyId, month, year);
+        BigDecimal currentCostMonthSum = bookService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
+        BigDecimal previousCostMonthSum = bookService.sumCostInvoiceAmountFromYearStart(companyId, month, year);
+        BigDecimal currentSalesMonthSum = bookService.sumCurrentMonthSalesInvoiceAmount(companyId, month, year);
+        BigDecimal previousSalesMonthSum = bookService.sumSalesInvoiceAmountFromYearStart(companyId, month, year);
 
         model.addAttribute("costInvoices", bookService.findCostInvoiceByDate(companyId, month, year));
-        List<SalesInvoiceDTO> salesInvoiceByDate = bookService.findSalesInvoiceByDate(month, year);
-        model.addAttribute("salesInvoices", salesInvoiceByDate);
-        model.addAttribute("currentMonthCostInvoiceSum", currentMonthSum);
-        model.addAttribute("totalCostInvoicesSum", previousMonthSum);
+        model.addAttribute("salesInvoices", bookService.findSalesInvoiceByDate(companyId, month, year));
+        
+        
+        model.addAttribute("currentMonthCostInvoiceSum", currentCostMonthSum);
+        model.addAttribute("totalCostInvoicesSum", previousCostMonthSum);
+        model.addAttribute("totalCostSumForCurrentMonth", currentCostMonthSum.add(previousCostMonthSum));
 
-        model.addAttribute("totalSumForCurrentMonth", currentMonthSum.add(previousMonthSum));
+        model.addAttribute("currentMonthSalesInvoiceSum", currentSalesMonthSum);
+        model.addAttribute("totalSalesInvoicesSum", previousSalesMonthSum);
+        model.addAttribute("totalSalesSumForCurrentMonth", currentSalesMonthSum.add(previousSalesMonthSum));
         return "book";
     }
 

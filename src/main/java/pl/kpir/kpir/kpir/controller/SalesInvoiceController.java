@@ -22,25 +22,25 @@ public class SalesInvoiceController {
     private final SalesInvoiceEntityService salesInvoiceEntityService;
     private final ContractorEntityService contractorEntityService;
     private final UserUtils userUtils;
+    //private Long companyId;
 
     public SalesInvoiceController(SalesInvoiceEntityService salesInvoiceEntityService, ContractorEntityService contractorEntityService, UserUtils userUtils) {
         this.salesInvoiceEntityService = salesInvoiceEntityService;
         this.contractorEntityService = contractorEntityService;
         this.userUtils = userUtils;
+        //companyId = this.userUtils.getLoggedInCompany();
     }
 
     @GetMapping(path = "/addSalesInvoice")
     public String loadInvoice(Model model, @RequestParam(name = "returnTo", required = false) String returnTo) {
         CreateSalesInvoiceForm createSalesInvoiceForm = new CreateSalesInvoiceForm();
         model.addAttribute("addSalesInvoice", createSalesInvoiceForm);
-        model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInUserId()));
+        model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInCompany()));
         if (returnTo != null) {
             model.addAttribute("returnTo", returnTo);
         }
         return "addSalesInvoice";
     }
-
-//    public String addUser(@ModelAttribute("createUserForm") @Valid CreateUserForm createUserForm, BindingResult bindingResult) {
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     public String addInvoice(@ModelAttribute("addSalesInvoice") @Valid CreateSalesInvoiceForm createSalesInvoiceForm, BindingResult bindingResult,
@@ -60,8 +60,10 @@ public class SalesInvoiceController {
     }
 
     @GetMapping(path = "/salesList")
-    public String salesList(Model model) {
-        model.addAttribute("salesList", salesInvoiceEntityService.findByCompanyId(userUtils.getLoggedInUserId()));
+    public String salesList(Model model,
+                            @RequestParam(name = "month", required = false) String month,
+                            @RequestParam(name = "year", required = false) String year) {
+        model.addAttribute("salesList", salesInvoiceEntityService.findByCompanyId(userUtils.getLoggedInCompany(), month, year));
         return "salesList";
     }
 
@@ -80,7 +82,7 @@ public class SalesInvoiceController {
             EditSaleInvoice editSaleInvoice = new EditSaleInvoice();
             model.addAttribute("currentSaleInvoice", salesInvoiceEntityService.findById(id));
             model.addAttribute("editSaleInvoice", editSaleInvoice);
-            model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInUserId()));
+            model.addAttribute("contractorList", contractorEntityService.findByCompanyId(userUtils.getLoggedInCompany()));
             return "editSaleInvoice";
         }
         return "redirect:/error/403";

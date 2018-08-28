@@ -100,8 +100,8 @@ public class SalesInvoiceEntityService {
                 .build();
     }
 
-    public List<SalesInvoiceDTO> findByCompanyId(Long id) {
-        return salesInvoiceEntityRepository.findByCompanyId(id).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
+    public List<SalesInvoiceDTO> findByCompanyId(Long id, String month, String year) {
+        return salesInvoiceEntityRepository.findByCompanyId(id, Integer.valueOf(month), Integer.valueOf(year)).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
     }
 
     public SalesInvoiceDTO findById(Long id) {
@@ -129,7 +129,16 @@ public class SalesInvoiceEntityService {
 
     }
 
-    public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
-        return salesInvoiceEntityRepository.findInvoiceByDate(month, year).stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
+    public List<SalesInvoiceDTO> findSalesInvoiceByDate(Long id, String month, String year) {
+        return salesInvoiceEntityRepository.findInvoiceByDate(id, Integer.valueOf(month), Integer.valueOf(year))
+                .stream().map(this::convertToSalesInvoicesDTO).collect(Collectors.toList());
+    }
+
+    public BigDecimal sumCurrentMonthSalesInvoiceAmount(Long id, String month, String year) {
+        return salesInvoiceEntityRepository.sumNetValueForCurrentMonth(id, Integer.valueOf(month), Integer.valueOf(year));
+    }
+
+    public BigDecimal sumSalesInvoicesValuesFromYearStart(Long id, String month, String year) {
+        return salesInvoiceEntityRepository.sumNetValueFromYearStart(id, Integer.valueOf(month), Integer.valueOf(year));
     }
 }

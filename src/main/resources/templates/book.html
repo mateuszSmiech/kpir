@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista kontrachentów</title>
+    <title>Książka przychodów i rozchodów</title>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom fonts for this template-->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
         <!-- Example DataTables Card-->
         <div class="card mb-3">
             <div class="card-header">
-                <i class="fa fa-table"></i> Lista Kontrachentów</div>
+                <i class="fa fa-table"></i>Książka przychodów i rozchodów</div>
             <div class="card-body">
                 <div style="display: inline-block">
                 <div>
@@ -134,7 +134,7 @@
                             <tfoot style="font-weight: bold;">
                             <tr>
                                 <td colspan="3">Suma miesiąca:</td>
-                                <td>--</td>
+                                <td th:text="${currentMonthSalesInvoiceSum}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td th:text="${currentMonthCostInvoiceSum}">--</td>
@@ -147,7 +147,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3">Przeniesienie z poprzedniego miesiąca:</td>
-                                <td>--</td>
+                                <td th:text="${totalSalesInvoicesSum}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td th:text="${totalCostInvoicesSum}">--</td>
@@ -160,10 +160,10 @@
                             </tr>
                             <tr>
                                 <td colspan="3">Razem od początku roku:</td>
+                                <td th:text="${totalSalesSumForCurrentMonth}">--</td>
                                 <td>--</td>
                                 <td>--</td>
-                                <td>--</td>
-                                <td th:text="${totalSumForCurrentMonth}">--</td>
+                                <td th:text="${totalCostSumForCurrentMonth}">--</td>
                                 <td>--</td>
                                 <td>--</td>
                                 <td>--</td>

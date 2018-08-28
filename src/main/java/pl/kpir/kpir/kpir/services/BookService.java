@@ -22,8 +22,8 @@ public class BookService {
         return costInvoiceEntityService.findByCostInvoiceByDate(id, month, year);
     }
 
-    public List<SalesInvoiceDTO> findSalesInvoiceByDate(String month, String year) {
-        return salesInvoiceEntityService.findSalesInvoiceByDate(month, year);
+    public List<SalesInvoiceDTO> findSalesInvoiceByDate(Long id, String month, String year) {
+        return salesInvoiceEntityService.findSalesInvoiceByDate(id, month, year);
     }
 
     public BigDecimal sumCurrentMonthCostInvoiceAmount(Long id, String month, String year) {
@@ -32,5 +32,13 @@ public class BookService {
 
     public BigDecimal sumCostInvoiceAmountFromYearStart(Long id, String month, String year) {
         return costInvoiceEntityService.sumInvoicesValuesFromYearStart(id, month, year);
+    }
+
+    public BigDecimal sumCurrentMonthSalesInvoiceAmount(Long id, String month, String year) {
+        return salesInvoiceEntityService.sumCurrentMonthSalesInvoiceAmount(id, month, year);
+    }
+
+    public BigDecimal sumSalesInvoiceAmountFromYearStart(Long id, String month, String year) {
+        return salesInvoiceEntityService.sumSalesInvoicesValuesFromYearStart(id, month, year);
     }
 }
