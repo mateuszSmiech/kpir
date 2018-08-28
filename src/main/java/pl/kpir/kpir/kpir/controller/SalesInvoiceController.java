@@ -13,6 +13,8 @@ import pl.kpir.kpir.kpir.services.SalesInvoiceEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
 import javax.validation.Valid;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -22,13 +24,11 @@ public class SalesInvoiceController {
     private final SalesInvoiceEntityService salesInvoiceEntityService;
     private final ContractorEntityService contractorEntityService;
     private final UserUtils userUtils;
-    //private Long companyId;
 
     public SalesInvoiceController(SalesInvoiceEntityService salesInvoiceEntityService, ContractorEntityService contractorEntityService, UserUtils userUtils) {
         this.salesInvoiceEntityService = salesInvoiceEntityService;
         this.contractorEntityService = contractorEntityService;
         this.userUtils = userUtils;
-        //companyId = this.userUtils.getLoggedInCompany();
     }
 
     @GetMapping(path = "/addSalesInvoice")
@@ -49,6 +49,10 @@ public class SalesInvoiceController {
             bindingResult.toString();
             return "addSalesInvoice";
         }
+        LocalDate date = LocalDate.now();
+        DecimalFormat numberPattern = new DecimalFormat("00");
+        String month = numberPattern.format(date.getMonthValue());
+        int year = date.getYear();
 
         salesInvoiceEntityService.saveInvoice(createSalesInvoiceForm);
         if(returnTo !=null) {
@@ -56,7 +60,7 @@ public class SalesInvoiceController {
                 return "redirect:" + createSalesInvoiceForm.getRouting();
             }
         }
-        return "redirect:salesList";
+        return "redirect:salesList?month=" + month + "&year=" + year;
     }
 
     @GetMapping(path = "/salesList")
@@ -64,6 +68,7 @@ public class SalesInvoiceController {
                             @RequestParam(name = "month", required = false) String month,
                             @RequestParam(name = "year", required = false) String year) {
         model.addAttribute("salesList", salesInvoiceEntityService.findByCompanyId(userUtils.getLoggedInCompany(), month, year));
+
         return "salesList";
     }
 

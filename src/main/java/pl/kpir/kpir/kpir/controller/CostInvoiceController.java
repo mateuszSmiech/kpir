@@ -11,12 +11,10 @@ import pl.kpir.kpir.kpir.services.ContractorEntityService;
 import pl.kpir.kpir.kpir.services.CostInvoiceEntityService;
 import pl.kpir.kpir.kpir.services.UserUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 @Controller
@@ -50,7 +48,8 @@ public class CostInvoiceController {
     public String addInvoice(@ModelAttribute CreateCostInvoiceForm createCostInvoiceForm,
                              @RequestParam(name="returnTo", required = false) String returnTo) {
         LocalDate date = LocalDate.now();
-        int month = date.getMonth().getValue();
+        DecimalFormat numberPattern = new DecimalFormat("00");
+        String month = numberPattern.format(date.getMonthValue());
         int year = date.getYear();
         costInvoiceEntityService.saveInvoice(createCostInvoiceForm);
         if (returnTo != null) {

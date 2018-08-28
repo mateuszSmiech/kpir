@@ -26,7 +26,8 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Faktury sprzedażowe">
-                <a class="nav-link" href="/salesInvoice/salesList">
+                <a class="nav-link"
+                   th:href="${'/salesInvoice/salesList?month='+ #dates.format(#dates.createNow(), 'MM')+ '&year='+ #dates.year(#dates.createNow())}">
                     <i class="fa fa-fw fa-table"></i>
                     <span class="nav-link-text">Faktury sprzedażowe</span>
                 </a>

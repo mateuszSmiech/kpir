@@ -25,7 +25,7 @@
 
                 <h1> Formularz dodawania faktury kosztowej</h1>
                 <form th:action="@{(${returnTo} ? 'add?returnTo=' + ${returnTo}: 'add')}" th:object="${addCostInvoice}" method="post">
-                    <input type="hidden" th:with="month=${#dates.month(#dates.createNow())}, year=${#dates.year(#dates.createNow())}"
+                    <input type="hidden" th:with="month=${#dates.format(#dates.createNow(), 'MM')}, year=${#dates.year(#dates.createNow())}"
                            name ="routing"
                            th:value="${'/book/?month=' + month + '&year=' + year}"/>
 
