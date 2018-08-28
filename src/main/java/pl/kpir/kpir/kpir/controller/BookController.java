@@ -32,17 +32,15 @@ public class BookController {
                                @RequestParam(name = "year", required = false) String year) {
         Long companyId = userUtils.getLoggedInCompany();
         BigDecimal currentMonthSum = bookService.sumCurrentMonthCostInvoiceAmount(companyId, month, year);
-        BigDecimal previousMonthSum = bookService.sumCostInvoiceAmountFromYearStart(month, year);
+        BigDecimal previousMonthSum = bookService.sumCostInvoiceAmountFromYearStart(companyId, month, year);
 
-        List<CostInvoiceDTO> costInvoiceByDate = bookService.findCostInvoiceByDate(companyId, month, year);
-        model.addAttribute("costInvoices", costInvoiceByDate);
+        model.addAttribute("costInvoices", bookService.findCostInvoiceByDate(companyId, month, year));
         List<SalesInvoiceDTO> salesInvoiceByDate = bookService.findSalesInvoiceByDate(month, year);
         model.addAttribute("salesInvoices", salesInvoiceByDate);
         model.addAttribute("currentMonthCostInvoiceSum", currentMonthSum);
         model.addAttribute("totalCostInvoicesSum", previousMonthSum);
 
-        BigDecimal totalSumForCurrentMonth = currentMonthSum.add(previousMonthSum);
-        model.addAttribute("totalSumForCurrentMonth", totalSumForCurrentMonth);
+        model.addAttribute("totalSumForCurrentMonth", currentMonthSum.add(previousMonthSum));
         return "book";
     }
 

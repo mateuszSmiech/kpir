@@ -30,7 +30,7 @@ public class BookService {
         return costInvoiceEntityService.sumCurrentMonthCostInvoiceAmount(id, month, year);
     }
 
-    public BigDecimal sumCostInvoiceAmountFromYearStart(String month, String year) {
-        return costInvoiceEntityService.sumInvoicesValuesFromYearStart(month, year);
+    public BigDecimal sumCostInvoiceAmountFromYearStart(Long id, String month, String year) {
+        return costInvoiceEntityService.sumInvoicesValuesFromYearStart(id, month, year);
     }
 }
