@@ -62,12 +62,11 @@ public class CostInvoiceEntityService {
     }
 
     private CostInvoiceDTO convertToCostInvoicesDTO(CostInvoiceEntity costInvoiceEntity) {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return CostInvoiceDTO.builder()
                 .id(costInvoiceEntity.getId())
                 .invoiceNumber(costInvoiceEntity.getInvoiceNumber())
                 .desc(costInvoiceEntity.getDesc())
-                .date(dateFormat.format(costInvoiceEntity.getDate()))
+                .date(costInvoiceEntity.getDate())
                 .netValue(costInvoiceEntity.getNetValue())
                 .vatAmount(costInvoiceEntity.getVatAmount())
                 .invoiceAmount(costInvoiceEntity.getInvoiceAmount())

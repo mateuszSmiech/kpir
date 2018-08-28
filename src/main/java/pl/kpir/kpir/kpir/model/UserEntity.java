@@ -4,7 +4,7 @@ package pl.kpir.kpir.kpir.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Getter
@@ -28,7 +28,7 @@ public class UserEntity {
     @Column (unique = true, nullable = false)
     private String email;
     @Column(name="birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
 
 
 }

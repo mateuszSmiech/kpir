@@ -16,7 +16,7 @@ public class CostInvoiceDTO {
     private Long id;
     private String invoiceNumber;
     private String desc;
-    private String date;
+    private LocalDate date;
     private BigDecimal netValue;
     private BigDecimal vatValue;
     private BigDecimal vatAmount;

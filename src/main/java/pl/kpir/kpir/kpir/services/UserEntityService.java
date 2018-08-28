@@ -10,6 +10,7 @@ import pl.kpir.kpir.kpir.model.UserEntity;
 import pl.kpir.kpir.kpir.repositories.UserEntityRepository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,13 +29,12 @@ public class UserEntityService implements UserDetailsService {
     }
 
     private UserEntity convertToUserEntity(CreateUserForm userForm) {
-        Date birthDate = Date.valueOf(userForm.getBirthDate());
         return UserEntity.builder()
                 .firstName(userForm.getFirstName())
                 .lastName(userForm.getLastName())
                 .password(userForm.getPassword())
                 .email(userForm.getEmail())
-                .birthDate(birthDate)
+                .birthDate(LocalDate.parse(userForm.getBirthDate()))
                 .build();
     }
 

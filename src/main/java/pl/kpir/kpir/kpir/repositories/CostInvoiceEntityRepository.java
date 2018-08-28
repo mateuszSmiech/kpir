@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface CostInvoiceEntityRepository extends JpaRepository<CostInvoiceEntity, Long> {
 
-    //TODO: uwzględnic companyId w query (teraz szuka dla szystkich użytkowników)
 
     @Query("SELECT cost FROM CostInvoiceEntity cost INNER JOIN cost.companyId comp " +
             "WHERE comp.id = :companyId " +

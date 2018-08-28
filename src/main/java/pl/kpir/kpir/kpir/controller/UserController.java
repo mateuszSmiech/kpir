@@ -37,4 +37,16 @@ public class UserController {
         userEntityService.saveUser(createUserForm);
         return "redirect:/";
     }
+
+    //TODO: implementacja kodu pocztowego
+    /*
+     * próba1:
+    * Zrobić form ze wszystkim oprócz postcode na tym samym obiekcie o1
+    * Zrobić form w którym będziemy wpisywać tylko postcode z obiktem o1
+    * na kliknięciu znajdź będzie się przeładowywać
+    *
+    *
+    * próba2: (spróbować w pierwszej kolejności)
+    * Dwa buttony w jednym formie w kontrolerze if(wciśnięty btn1)(zrób akcje1) else (zrób akcje 2)
+    * */
 }
